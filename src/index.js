@@ -10,21 +10,21 @@ import './images/turing-logo.png'
 
 console.log('YOU CAN DO IT!!');
 
-var modal = document.querySelector(".modal");
-var trigger = document.querySelector(".trigger");
-var closeButton = document.querySelector(".close-button");
+var mloginPopup = document.querySelector(".mlogin-popup");
+var loginTrigger = document.querySelector(".mlogin-trigger");
+var mCloseButton = document.querySelector(".mclose-button");
 
-trigger.addEventListener("click", toggleModal);
-closeButton.addEventListener("click", toggleModal);
+loginTrigger.addEventListener("click", toggleModal);
+mCloseButton.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);
 
 function toggleModal() {
-  modal.classList.toggle("show-modal");
+  mloginPopup.classList.toggle("show-modal");
 }
 
 function windowOnClick(event) {
   event.preventDefault()
-  if (event.target === modal) {
+  if (event.target === mloginPopup) {
     toggleModal();
   }
 }
