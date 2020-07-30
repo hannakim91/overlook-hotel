@@ -8,6 +8,8 @@ import './css/base.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
+import api from './api.js'
+
 var mloginPopup = document.querySelector(".mlogin-popup");
 var mloginTrigger = document.querySelector(".mlogin-trigger");
 var mCloseButton = document.querySelector(".mclose-button");
@@ -25,4 +27,5 @@ function windowOnClick(event) {
   if (event.target === mloginPopup) {
     toggleModal();
   }
+  api.getUsers();
 }
