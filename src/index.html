@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
+    <title>The Overlook Hotel</title>
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
+    <header>
+      <h1>the overlook</h1>
+    </header>
+    
+    <main>
 
     <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
 
+    <button class="trigger">Log In</button>
+    <section class="modal">
+      <section class="modal-content">
+        <span class="close-button">&times;</span>
+        <h1>Sign into your account</h1>
+        <input type="text">
+        <input type="password">
+        <button>Log In</button>
+      </section>
+    </section>
+
+
+      <!-- <section id="customer-select-dates-container">
+        <label class="future-date-text" for="arrival-date-input">Arrival date:<label>
+        <input type="date" class="booking-input" id="arrival-date-input" placeholder="mm/dd/yyyy">
+        <button type="button" id="customer-search-dates-button" aria-label='Add search Dates'>Search availability</button>
+      </section> -->
+    </main>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>
