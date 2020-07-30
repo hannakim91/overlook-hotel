@@ -11,10 +11,10 @@ import './images/turing-logo.png'
 console.log('YOU CAN DO IT!!');
 
 var mloginPopup = document.querySelector(".mlogin-popup");
-var loginTrigger = document.querySelector(".mlogin-trigger");
+var mloginTrigger = document.querySelector(".mlogin-trigger");
 var mCloseButton = document.querySelector(".mclose-button");
 
-loginTrigger.addEventListener("click", toggleModal);
+mloginTrigger.addEventListener("click", toggleModal);
 mCloseButton.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);
 
