@@ -28,4 +28,6 @@ function windowOnClick(event) {
     toggleModal();
   }
   api.getUsers();
+  api.getRooms();
+  api.getBookings();
 }
