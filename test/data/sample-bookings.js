@@ -1,33 +1,6 @@
-const expect = require('chai').expect;
-const User = require('../src/User');
-const Customer = require('../src/Customer');
-const Manager = require('../src/Manager');
-
-const users = [
-  {
-    "id": 1,
-    "name": "Leatha Ullrich"
-  },
-  {
-    "id": 2,
-    "name": "Rocio Schuster"
-  },
-  {
-    "id": 3,
-    "name": "Kelvin Schiller"
-  },
-  {
-    "id": 4,
-    "name": "Kennedi Emard"
-  },
-  {
-    "id": 5,
-    "name": "Rhiannon Little"
-  }
-]
-
-// 1 has 1 booking, 2 has 2 bookings, 3 has 0 bookings, user 4 has 2,
-const bookings = [
+// 1 has 1 booking, 2 has 2 bookings, 3 has 0 bookings, user 4 has 2, user 5 has 1
+//rooms 12, 9, 18, 5, 1
+export const bookings = [
   {
     "id": "5fwrgu4i7k55hl6t8",
     "userID": 1,
@@ -63,5 +36,11 @@ const bookings = [
     "roomNumber":18,
     "roomServiceCharges":[]
   },
-  {"id":"5fwrgu4i7k55hl72y","userID":5,"date":"2020/01/23","roomNumber":12,"roomServiceCharges":[]},
+  {
+    "id":"5fwrgu4i7k55hl72y",
+    "userID":5,
+    "date":"2020/01/23",
+    "roomNumber":12,
+    "roomServiceCharges":[]
+  }
 ]
