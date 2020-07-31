@@ -18,7 +18,6 @@ class Hotel {
 // maybe refactor to give revenue for today OR give customer's total for the day -- reusable
   calculateTodaysRevenue(date, bookingData, roomData) {
     let roomsBooked = this.findRoomsBooked(date, bookingData)
-    console.log(roomsBooked)
     return roomsBooked.reduce((dailyRevenue, bookedRoom) => {
       roomData.forEach(room => {
         if (room.number === bookedRoom.roomNumber) {

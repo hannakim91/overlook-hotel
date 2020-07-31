@@ -21,10 +21,10 @@ describe('Hotel details', function() {
   });
   it('should calculate how many rooms are available for a given date', function() {
     const numberOfRooms = hotel.findRoomsAvailable('2020/04/22', sampleBookings)
-    const numberRooms = hotel.findRoomsAvailable('2020/01/14', sampleBookings)
-
+    const numberRooms = hotel.findRoomsAvailable('2021/01/05', sampleBookings)
+    console.log(numberRooms)
     expect(numberOfRooms).to.equal(23);
-    expect(numberRooms).to.equal(6)
+    expect(numberRooms).to.equal(25)
   });
   it('should calculate total revenue for today\'s date', function() {
     const todaysRevenue = hotel.calculateTodaysRevenue('2020/04/22', sampleBookings, sampleRooms)
