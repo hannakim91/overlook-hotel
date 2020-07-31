@@ -8,7 +8,7 @@ import './css/base.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
-console.log('YOU CAN DO IT!!');
+import api from './api.js'
 
 var mloginPopup = document.querySelector(".mlogin-popup");
 var mloginTrigger = document.querySelector(".mlogin-trigger");
@@ -27,4 +27,7 @@ function windowOnClick(event) {
   if (event.target === mloginPopup) {
     toggleModal();
   }
+  api.getUsers();
+  api.getRooms();
+  api.getBookings();
 }
