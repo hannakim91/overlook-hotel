@@ -10,7 +10,12 @@ class Hotel {
     let roomsBooked = this.findRoomsBooked(date, data)
     return 25 - roomsBooked.length
   }
-// maybe refactor to give revnue for today, give customer's total for the day -- reusable
+
+  calculatePercentBooked(date, data) {
+    let roomsBooked = this.findRoomsBooked(date, data)
+    return (roomsBooked.length / 25) * 100
+  }
+// maybe refactor to give revenue for today OR give customer's total for the day -- reusable
   calculateTodaysRevenue(date, bookingData, roomData) {
     let roomsBooked = this.findRoomsBooked(date, bookingData)
     console.log(roomsBooked)
@@ -22,8 +27,9 @@ class Hotel {
       })
       return dailyRevenue
     }, 0)
-
   }
+
+
 
 }
 

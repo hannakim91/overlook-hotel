@@ -19,18 +19,21 @@ describe('Hotel details', function() {
   it('should be an instance of Hotel', function() {
     expect(hotel).to.be.an.instanceof(Hotel);
   });
-  it('should show how many rooms are available for a given date', function() {
-
+  it('should calculate how many rooms are available for a given date', function() {
     const numberOfRooms = hotel.findRoomsAvailable('2020/04/22', sampleBookings)
     const numberRooms = hotel.findRoomsAvailable('2020/01/14', sampleBookings)
 
     expect(numberOfRooms).to.equal(23);
     expect(numberRooms).to.equal(6)
   });
-  it('should show total revenue for today\'s date', function() {
+  it('should calculate total revenue for today\'s date', function() {
     const todaysRevenue = hotel.calculateTodaysRevenue('2020/04/22', sampleBookings, sampleRooms)
-
-//294.56+176.36
+    //2 rooms - 294.56+176.36
     expect(todaysRevenue).to.equal(470.92)
+  });
+  it('should calculate percentage of rooms occupied for today\'s date', function() {
+    const percentBooked = hotel.calculatePercentBooked('2020/04/22', sampleBookings)
+
+    expect(percentBooked).to.equal(8)
   });
 });
