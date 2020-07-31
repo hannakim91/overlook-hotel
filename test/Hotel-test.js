@@ -22,7 +22,7 @@ describe('Hotel details', function() {
   it('should calculate how many rooms are available for a given date', function() {
     const numberOfRooms = hotel.findRoomsAvailable('2020/04/22', sampleBookings)
     const numberRooms = hotel.findRoomsAvailable('2025/01/05', sampleBookings)
-    console.log(numberRooms)
+
     expect(numberOfRooms).to.equal(23);
     expect(numberRooms).to.equal(25)
   });
@@ -43,6 +43,6 @@ describe('Hotel details', function() {
   it('should calculate total amount a given user has spent on rooms', function() {
     const totalSpending = hotel.calculateUserSpending(11, sampleBookings, sampleRooms)
 
-    expect(totalSpending).to.equal(1)
+    expect(totalSpending).to.equal(4456.90)
   });
 });
