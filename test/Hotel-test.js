@@ -23,8 +23,14 @@ describe('Hotel details', function() {
 
     const numberOfRooms = hotel.findRoomsAvailable('2020/04/22', sampleBookings)
     const numberRooms = hotel.findRoomsAvailable('2020/01/14', sampleBookings)
+
     expect(numberOfRooms).to.equal(23);
     expect(numberRooms).to.equal(6)
+  });
+  it('should show total revenue for today\'s date', function() {
+    const todaysRevenue = hotel.calculateTodaysRevenue('2020/04/22', sampleBookings, sampleRooms)
 
+//294.56+176.36
+    expect(todaysRevenue).to.equal(470.92)
   });
 });
