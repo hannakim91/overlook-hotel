@@ -40,4 +40,9 @@ describe('Hotel details', function() {
     expect(percentBooked).to.equal(8)
     expect(noBookingsDate).to.equal(0)
   });
+  it('should calculate total amount a given user has spent on rooms', function() {
+    const totalSpending = hotel.calculateUserSpending(11, sampleBookings, sampleRooms)
+
+    expect(totalSpending).to.equal(1)
+  });
 });

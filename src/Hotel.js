@@ -28,7 +28,20 @@ class Hotel {
     }, 0)
   }
 
-
+// refactor with findRoomsBooked - maybe generic "findBookingData"?
+  calculateUserSpending(id, bookingData, roomData) {
+    let userBookings = bookingData.filter(booking => booking.userID === id)
+    console.log(userBookings)
+    return userBookings.reduce((totalSpending, booking) => {
+      roomData.forEach(room => {
+        if (room.number === booking.roomNumber) {
+          totalSpending += room.costPerNight
+        }
+      })
+      console.log(userBookings)
+      return totalSpending
+    })
+  }
 
 }
 
