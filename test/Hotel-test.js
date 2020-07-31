@@ -40,6 +40,13 @@ describe('Hotel details', function() {
     expect(percentBooked).to.equal(8)
     expect(noBookingsDate).to.equal(0)
   });
+  it('should find an array of all bookings for a given user', function() {
+    const usersBookings = hotel.findUsersBookings(11, sampleBookings)
+    console.log(usersBookings)
+    expect(usersBookings).to.be.an.instanceOf(Array)
+    expect(usersBookings.length).to.equal(12)
+  });
+
   it('should calculate total amount a given user has spent on rooms', function() {
     const totalSpending = hotel.calculateUserSpending(11, sampleBookings, sampleRooms)
 

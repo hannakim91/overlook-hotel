@@ -28,6 +28,11 @@ class Hotel {
     }, 0)
   }
 
+  findUsersBookings(id, bookingData) {
+    let bookings = bookingData.filter(booking => booking.userID === id)
+    return bookings
+  }
+
 // refactor with findRoomsBooked - maybe generic "findBookingData"?
   calculateUserSpending(id, bookingData, roomData) {
     let userBookings = bookingData.filter(booking => booking.userID === id)
