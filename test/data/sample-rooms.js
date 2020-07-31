@@ -1,4 +1,4 @@
-export const sampleRooms = [
+const sampleRooms = [
   {
     "number": 1,
     "roomType": "residential suite",
@@ -200,3 +200,5 @@ export const sampleRooms = [
     "costPerNight": 305.85
   }
 ]
+
+export default sampleRooms

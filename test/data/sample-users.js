@@ -1,4 +1,4 @@
-export const sampleUsers = [
+const sampleUsers = [
   {
     "id": 1,
     "name": "Leatha Ullrich"
@@ -200,3 +200,5 @@ export const sampleUsers = [
     "name": "Eldridge Muller"
   }
 ]
+
+export default sampleUsers;
