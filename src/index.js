@@ -42,6 +42,7 @@ function checkLogInDetails() {
   const username = document.querySelector('#username')
   const password = document.querySelector('#password')
   const loggedInView = document.querySelector('.logged-in-view')
+  const logInForm = document.querySelector('.mcontent')
 
   if (username.value === 'manager' && password.value === 'overlook2020') {
     toggleModal()
@@ -50,6 +51,6 @@ function checkLogInDetails() {
     toggleModal()
     loggedInView.classList.remove('hidden')
   } else {
-    console.log('Please enter a valid username and password')
+    logInForm.innerHTML += 'Please refresh and enter a valid username and password'
   }
 }
