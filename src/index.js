@@ -32,10 +32,19 @@ function windowOnClick(event) {
 }
 
 function viewLoggedInView(event) {
-  // const username = document.querySelector('#')
-  // if ()
   api.getUsers();
   api.getRooms();
   api.getBookings();
+
+  const username = document.querySelector('#username')
+  const password = document.querySelector('#password')
+
+  if (username.value === 'manager' && password.value === 'overlook2020') {
+    console.log('hi manager')
+  } else if (username.value.includes('customer') && password.value === 'overlook2020') {
+    console.log('hi customer')
+  } else if (password.value !== 'overlook2020') {
+    console.log('incorrect password')
+  }
 
 }
