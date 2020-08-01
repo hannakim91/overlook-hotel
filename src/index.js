@@ -35,16 +35,21 @@ function viewLoggedInView(event) {
   api.getUsers();
   api.getRooms();
   api.getBookings();
+  checkLogInDetails()
+}
 
+function checkLogInDetails() {
   const username = document.querySelector('#username')
   const password = document.querySelector('#password')
+  const loggedInView = document.querySelector('.logged-in-view')
 
   if (username.value === 'manager' && password.value === 'overlook2020') {
-    console.log('hi manager')
+    toggleModal()
+    loggedInView.classList.remove('hidden')
   } else if (username.value.includes('customer') && password.value === 'overlook2020') {
-    console.log('hi customer')
-  } else if (password.value !== 'overlook2020') {
-    console.log('incorrect password')
+    toggleModal()
+    loggedInView.classList.remove('hidden')
+  } else {
+    console.log('Please enter a valid username and password')
   }
-
 }
