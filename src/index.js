@@ -10,18 +10,18 @@ import './images/turing-logo.png'
 
 import api from './api.js'
 
-const mloginPopup = document.querySelector(".mlogin-popup");
-const mloginTrigger = document.querySelector(".mlogin-trigger");
-const mCloseButton = document.querySelector(".mclose-button");
-const changeViewButton = document.querySelector(".change-view-button");
+const mloginPopup = document.querySelector('.mlogin-popup');
+const mloginTrigger = document.querySelector('.mlogin-trigger');
+const mCloseButton = document.querySelector('.mclose-button');
+const changeViewButton = document.querySelector('.change-view-button');
 
-mloginTrigger.addEventListener("click", toggleModal);
-mCloseButton.addEventListener("click", toggleModal);
-window.addEventListener("click", windowOnClick);
-changeViewButton.addEventListener("click", viewLoggedInView)
+mloginTrigger.addEventListener('click', toggleModal);
+mCloseButton.addEventListener('click', toggleModal);
+window.addEventListener('click', windowOnClick);
+changeViewButton.addEventListener('click', viewLoggedInView)
 
 function toggleModal() {
-  mloginPopup.classList.toggle("show-modal");
+  mloginPopup.classList.toggle('show-modal');
 }
 
 function windowOnClick(event) {
@@ -32,9 +32,10 @@ function windowOnClick(event) {
 }
 
 function viewLoggedInView(event) {
-  if (event.target === changeViewButton) {
-    api.getUsers();
-    api.getRooms();
-    api.getBookings();
-  }
+  // const username = document.querySelector('#')
+  // if ()
+  api.getUsers();
+  api.getRooms();
+  api.getBookings();
+
 }
