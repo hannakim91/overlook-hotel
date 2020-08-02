@@ -42,7 +42,6 @@ describe('Hotel details', function() {
   });
   it('should find an array of all bookings for a given user', function() {
     const usersBookings = hotel.findUsersBookings(11, sampleBookings)
-    console.log(usersBookings)
     expect(usersBookings).to.be.an.instanceOf(Array)
     expect(usersBookings.length).to.equal(12)
   });

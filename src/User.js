@@ -1,6 +1,5 @@
 class User {
-  constructor(username) {
-    this.username = username;
+  constructor() {
     this.password = 'overlook2020';
   }
 }

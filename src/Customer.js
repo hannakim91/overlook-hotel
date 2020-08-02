@@ -1,8 +1,9 @@
 import User from '../src/User';
 
 class Customer extends User {
-  constructor(username) {
-    super(username)
+  constructor(userData) {
+    super()
+    this.username = 'customer' + userData.id
   }
 }
 
