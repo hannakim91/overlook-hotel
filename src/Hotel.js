@@ -56,7 +56,6 @@ class Hotel {
           roomsBooked.push(room)
         }
       })
-      console.log(roomsBooked)
       return roomsBooked
     }, [])
     return roomData.filter(room => !rooms.includes(room))
