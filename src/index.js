@@ -25,7 +25,6 @@ function toggleModal() {
 }
 
 function windowOnClick(event) {
-  // event.preventDefault() --- only where submit button is being affected**
   if (event.target === mloginPopup) {
     toggleModal();
   }
@@ -36,10 +35,10 @@ function viewLoggedInView(event) {
   api.getUsers();
   api.getRooms();
   api.getBookings();
-  checkLogInDetails()
-  // const loggedInView = document.querySelector('.logged-in-view')
-  // toggleModal()
-  // loggedInView.classList.remove('hidden')
+  // checkLogInDetails()
+  const loggedInView = document.querySelector('.logged-in-view')
+  toggleModal()
+  loggedInView.classList.remove('hidden')
 }
 
 function checkLogInDetails() {
@@ -59,21 +58,18 @@ function checkLogInDetails() {
   }
 }
 
-
 function getTodaysDate() {
   let date = new Date()
   let day = date.getDate()
   let month = date.getMonth() + 1
-  let year = date.getFullYear()
   if (day < 10) {
     day = `0${day}`
   }
   if (month < 10) {
     month = `0${month}`
   }
-  let today = `${month}-${day}-${year}`
-  console.log(today)
-  const dateInput = document.getElementById('date-input')
-  dateInput.setAttribute('min', today)
+  let today = `${month}-${day}-${date.getFullYear()}`
+  document.getElementById('date-input').setAttribute('min', today)
 }
+
 getTodaysDate()
