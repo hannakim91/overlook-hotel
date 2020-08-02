@@ -16,7 +16,9 @@ describe('Customer', function() {
     expect(customer).to.be.an.instanceof(Customer);
   });
   it('should have a username', function() {
-    console.log(customer.username)
     expect(customer.username).to.equal('customer1');
+  });
+  it('should have an id #', function() {
+    expect(customer.id).to.equal(1)
   });
 });
