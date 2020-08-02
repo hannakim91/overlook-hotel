@@ -46,7 +46,7 @@ function checkLogInDetails() {
   const password = document.querySelector('#password')
   const loggedInView = document.querySelector('.logged-in-view')
   const logInForm = document.querySelector('.mcontent')
-
+// should check with input values be properties of User?
   if (username.value === 'manager' && password.value === 'overlook2020') {
     toggleModal()
     loggedInView.classList.remove('hidden')
