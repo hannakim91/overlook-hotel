@@ -15,9 +15,6 @@ describe('Customer', function() {
   it('should be an instance of Customer', function() {
     expect(customer).to.be.an.instanceof(Customer);
   });
-  it('should have a default password', function() {
-    expect(customer.password).to.equal('overlook2020');
-  });
   it('should have a username', function() {
     console.log(customer.username)
     expect(customer.username).to.equal('customer1');

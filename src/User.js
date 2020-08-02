@@ -1,6 +1,5 @@
 class User {
   constructor() {
-    this.password = 'overlook2020';
   }
 }
 

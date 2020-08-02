@@ -54,5 +54,11 @@ describe('Hotel details', function() {
     const roomsAvailable = hotel.getAvailableRooms('2020/04/22', sampleBookings, sampleRooms)
     // console.log(roomsAvailable)
     expect(roomsAvailable.length).to.equal(23)
-  })
+  });
+  it('should be able to filter a list of available rooms by roomType property', function() {
+
+    const roomsAvailable = hotel.getAvailableRooms('2020/04/22', sampleBookings, sampleRooms)
+    const singleRooms = hotel.getRoomsByType(roomsAvailable, '')
+    expect(singleRooms.length).to.equal(13)
+  });
 });

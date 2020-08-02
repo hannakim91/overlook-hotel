@@ -62,6 +62,12 @@ class Hotel {
     return roomData.filter(room => !rooms.includes(room))
   }
 
+  getRoomsByType(roomsAvailable, roomType) {
+    return roomsAvailable.filter(room => room.roomType === roomType)
+  }
+
+
+
     // get array of room objects based on roomsBooked -- array of rooms{} --> use that
   //filter over roomData
   //if !bookedRooms.includes(room)
