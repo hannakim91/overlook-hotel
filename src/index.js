@@ -24,6 +24,14 @@ function toggleModal() {
   mloginPopup.classList.toggle('show-modal');
 }
 
+function toggleLoggedInView() {
+  const loggedInView = document.querySelector('.logged-in-view')
+  const mainView = document.querySelector('.main-view')
+  toggleModal()
+  loggedInView.classList.remove('hidden')
+  mainView.classList.add('hidden')
+}
+
 function windowOnClick(event) {
   if (event.target === mloginPopup) {
     toggleModal();
@@ -36,9 +44,7 @@ function viewLoggedInView(event) {
   api.getRooms();
   api.getBookings();
   // checkLogInDetails()
-  const loggedInView = document.querySelector('.logged-in-view')
-  toggleModal()
-  loggedInView.classList.remove('hidden')
+  toggleLoggedInView()
 }
 
 function checkLogInDetails() {
@@ -48,11 +54,9 @@ function checkLogInDetails() {
   const logInForm = document.querySelector('.mcontent')
 // should check with input values be properties of User?
   if (username.value === 'manager' && password.value === 'overlook2020') {
-    toggleModal()
-    loggedInView.classList.remove('hidden')
+    toggleLoggedInView()
   } else if (username.value.includes('customer') && password.value === 'overlook2020') {
-    toggleModal()
-    loggedInView.classList.remove('hidden')
+    toggleLoggedInView()
   } else {
     logInForm.innerHTML += 'Please refresh and enter a valid username and password'
   }
