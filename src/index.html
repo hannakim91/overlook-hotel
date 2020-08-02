@@ -24,15 +24,17 @@
 
     <article class="logged-in-view hidden">
       you are logged in
+
+      <section id="select-dates-container">
+        <label class="booking-date" for="user-booking-date-input">Book A Stay:<label>
+        <input type="date" id="date-input" placeholder="mm/dd/yyyy" min="01-01-2020" max="12-31-2025">
+        <button type="button" id="search-date-button" aria-label="Add search Date">Search availability</button>
+      </section>
     </article>
 
 
 
-      <!-- <section id="customer-select-dates-container">
-        <label class="future-date-text" for="arrival-date-input">Arrival date:<label>
-        <input type="date" class="booking-input" id="arrival-date-input" placeholder="mm/dd/yyyy">
-        <button type="button" id="customer-search-dates-button" aria-label='Add search Dates'>Search availability</button>
-      </section> -->
+
     </main>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
