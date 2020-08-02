@@ -1,7 +1,11 @@
 .mlogin-trigger {
-  
+  background: transparent;
+  width: 8rem;
+  height: 2.5rem;
 }
-
+button:hover {
+  background-color: darkgray;
+}
 .mlogin-popup {
   position: fixed;
   left: 0;
@@ -17,6 +21,7 @@
 .mcontent {
   position: absolute;
   display: grid;
+  grid-row-gap: 1em;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -31,9 +36,6 @@
   cursor: pointer;
   border-radius: 0.25rem;
   background-color: transparent;
-}
-.mclose-button:hover {
-  background-color: darkgray;
 }
 .show-modal {
   opacity: 1;
