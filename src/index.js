@@ -12,16 +12,25 @@ import api from './api.js'
 
 const mloginPopup = document.querySelector('.mlogin-popup');
 const mloginTrigger = document.querySelector('.mlogin-trigger');
-const mCloseButton = document.querySelector('.mclose-button');
+const modalCloseButton = document.querySelector('.mclose-button');
 const changeViewButton = document.querySelector('.change-view-button');
 const loggedInView = document.querySelector('.logged-in-view')
 const mainView = document.querySelector('.main-view')
+const logOutButton = document.querySelector('#log-out-button')
 
 window.addEventListener('load', onWindowLoad)
 window.addEventListener('click', windowOnClick);
 mloginTrigger.addEventListener('click', toggleModal);
-mCloseButton.addEventListener('click', toggleModal);
+modalCloseButton.addEventListener('click', toggleModal);
 changeViewButton.addEventListener('click', viewLoggedInView)
+logOutButton.addEventListener('click', handleLogOutClick);
+
+function handleLogOutClick(event) {
+  mainView.classList.remove('hidden')
+  loggedInView.classList.add('hidden')
+  localStorage.setItem('loggedIn', false)
+  //clear local storage
+}
 
 function onWindowLoad() {
   if (JSON.parse(localStorage.getItem('loggedIn')) === true) {
@@ -35,6 +44,7 @@ function toggleModal() {
   mloginPopup.classList.toggle('show-modal');
 }
 
+// make this a toggle
 function showLoggedInView() {
   loggedInView.classList.remove('hidden')
   mainView.classList.add('hidden')
