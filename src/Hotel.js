@@ -7,18 +7,18 @@ class Hotel {
   }
 
   findRoomsAvailable(date, data) {
-    let roomsBooked = this.getBookingData(date, data)
-    return 25 - roomsBooked.length
+    let bookingsOnDate = this.getBookingData(date, data)
+    return 25 - bookingsOnDate.length
   }
 
   calculatePercentBooked(date, data) {
-    let roomsBooked = this.getBookingData(date, data)
-    return (roomsBooked.length / 25) * 100
+    let bookingsOnDate = this.getBookingData(date, data)
+    return (bookingsOnDate.length / 25) * 100
   }
 
   calculateTodaysRevenue(date, bookingData, roomData) {
-    let roomsBooked = this.getBookingData(date, bookingData)
-    return roomsBooked.reduce((dailyRevenue, bookedRoom) => {
+    let bookingsOnDate = this.getBookingData(date, bookingData)
+    return bookingsOnDate.reduce((dailyRevenue, bookedRoom) => {
       roomData.forEach(room => {
         if (room.number === bookedRoom.roomNumber) {
           dailyRevenue += room.costPerNight
@@ -49,21 +49,26 @@ class Hotel {
   }
 
   getAvailableRooms(date, bookingData, roomData) {
-    let roomsBooked = this.getBookingData(date, bookingData)
-    return roomData.reduce((list, room) => {
-      roomsBooked.forEach(bookedRoom => {
-        if (room.number !== bookedRoom.roomNumber) {
-          list.push(room)
+    let bookingsOnDate = this.getBookingData(date, bookingData)
+    let rooms = roomData.reduce((roomsBooked, room) => {
+      bookingsOnDate.forEach(booking => {
+        if (booking.roomNumber === room.number) {
+          roomsBooked.push(room)
         }
       })
-      console.log(list)
-      return list
+      console.log(roomsBooked)
+      return roomsBooked
     }, [])
-
+    return roomData.filter(room => !rooms.includes(room))
   }
+
+    // get array of room objects based on roomsBooked -- array of rooms{} --> use that
+  //filter over roomData
+  //if !bookedRooms.includes(room)
 
 
   // iterate through roomData - return array of rooms where room.number DON'T match any room.roomNumber in roomsBooked array (nest iteration)
+
 
 }
 
