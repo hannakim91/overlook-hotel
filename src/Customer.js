@@ -5,6 +5,8 @@ class Customer extends User {
     super()
     this.username = 'customer' + userData.id
   }
+
+  
 }
 
 export default Customer

@@ -48,6 +48,23 @@ class Hotel {
     }, 0)
   }
 
+  getAvailableRooms(date, bookingData, roomData) {
+    let roomsBooked = this.getBookingData(date, bookingData)
+    return roomData.reduce((list, room) => {
+      roomsBooked.forEach(bookedRoom => {
+        if (room.number !== bookedRoom.roomNumber) {
+          list.push(room)
+        }
+      })
+      console.log(list)
+      return list
+    }, [])
+
+  }
+
+
+  // iterate through roomData - return array of rooms where room.number DON'T match any room.roomNumber in roomsBooked array (nest iteration)
+
 }
 
 export default Hotel
