@@ -28,8 +28,9 @@ class Hotel {
     }, 0)
   }
 
-  // maybe refactor to give revenue for today OR give customer's total for the day -- reusable but would need 4 parameters passed through...
+  // maybe refactor to give revenue for today OR give customer's total for the day -- reusable but would need 4 parameters passed through... -also if naming too generic, will you know what it's doing?
 
+//can separate out pieces of the method instead
   findUsersBookings(id, bookingData) {
     let bookings = bookingData.filter(booking => booking.userID === id)
     return bookings
