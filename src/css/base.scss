@@ -12,6 +12,15 @@ body {
   background-position: center;
 }
 
-header {
+main {
+  display: grid;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+.main-view {
   color: white;
+
 }

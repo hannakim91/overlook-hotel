@@ -4,30 +4,36 @@
     <title>The Overlook Hotel</title>
   </head>
   <body>
-    <header>
-      <h1>the overlook</h1>
-    </header>
     <main>
-
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
+      <article class="main-view">
+        <p>-welcome to-</p>
+        <h1>the overlook</h1>
+      </article>
 
     <button class="mlogin-trigger">Log In</button>
     <article class="mlogin-popup">
       <form class="mcontent">
         <button class="mclose-button">&times;</button>
         <h1>Sign into your account here</h1>
-        <input type="text" placeholder="username">
-        <input type="password" placeholder="password">
-        <button>Log In</button>
+        <input id="username" type="text" placeholder="username">
+        <input id="password" type="password" placeholder="password">
+        <button class="change-view-button">Log In</button>
       </form>
     </article>
 
+    <article class="logged-in-view hidden">
+      you are logged in
 
-      <!-- <section id="customer-select-dates-container">
-        <label class="future-date-text" for="arrival-date-input">Arrival date:<label>
-        <input type="date" class="booking-input" id="arrival-date-input" placeholder="mm/dd/yyyy">
-        <button type="button" id="customer-search-dates-button" aria-label='Add search Dates'>Search availability</button>
-      </section> -->
+      <section id="select-dates-container">
+        <label class="booking-date" for="user-booking-date-input">Book A Stay:<label>
+        <input type="date" id="date-input" placeholder="mm/dd/yyyy" min="01-01-2020" max="12-31-2025">
+        <button type="button" id="search-date-button" aria-label="Add search Date">Search availability</button>
+      </section>
+    </article>
+
+
+
+
     </main>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>

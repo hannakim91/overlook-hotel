@@ -42,14 +42,17 @@ describe('Hotel details', function() {
   });
   it('should find an array of all bookings for a given user', function() {
     const usersBookings = hotel.findUsersBookings(11, sampleBookings)
-    console.log(usersBookings)
     expect(usersBookings).to.be.an.instanceOf(Array)
     expect(usersBookings.length).to.equal(12)
   });
-
   it('should calculate total amount a given user has spent on rooms', function() {
     const totalSpending = hotel.calculateUserSpending(11, sampleBookings, sampleRooms)
 
     expect(totalSpending).to.equal(4456.90)
   });
+  it('should be able to create a list of rooms available on a given date', function() {
+    const roomsAvailable = hotel.getAvailableRooms('2020/04/22', sampleBookings, sampleRooms)
+    // console.log(roomsAvailable)
+    expect(roomsAvailable.length).to.equal(23)
+  })
 });

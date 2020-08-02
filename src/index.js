@@ -10,24 +10,66 @@ import './images/turing-logo.png'
 
 import api from './api.js'
 
-var mloginPopup = document.querySelector(".mlogin-popup");
-var mloginTrigger = document.querySelector(".mlogin-trigger");
-var mCloseButton = document.querySelector(".mclose-button");
+const mloginPopup = document.querySelector('.mlogin-popup');
+const mloginTrigger = document.querySelector('.mlogin-trigger');
+const mCloseButton = document.querySelector('.mclose-button');
+const changeViewButton = document.querySelector('.change-view-button');
 
-mloginTrigger.addEventListener("click", toggleModal);
-mCloseButton.addEventListener("click", toggleModal);
-window.addEventListener("click", windowOnClick);
+mloginTrigger.addEventListener('click', toggleModal);
+mCloseButton.addEventListener('click', toggleModal);
+window.addEventListener('click', windowOnClick);
+changeViewButton.addEventListener('click', viewLoggedInView)
 
 function toggleModal() {
-  mloginPopup.classList.toggle("show-modal");
+  mloginPopup.classList.toggle('show-modal');
 }
 
 function windowOnClick(event) {
-  event.preventDefault()
   if (event.target === mloginPopup) {
     toggleModal();
   }
+}
+
+function viewLoggedInView(event) {
+  event.preventDefault();
   api.getUsers();
   api.getRooms();
   api.getBookings();
+  // checkLogInDetails()
+  const loggedInView = document.querySelector('.logged-in-view')
+  toggleModal()
+  loggedInView.classList.remove('hidden')
 }
+
+function checkLogInDetails() {
+  const username = document.querySelector('#username')
+  const password = document.querySelector('#password')
+  const loggedInView = document.querySelector('.logged-in-view')
+  const logInForm = document.querySelector('.mcontent')
+// should check with input values be properties of User?
+  if (username.value === 'manager' && password.value === 'overlook2020') {
+    toggleModal()
+    loggedInView.classList.remove('hidden')
+  } else if (username.value.includes('customer') && password.value === 'overlook2020') {
+    toggleModal()
+    loggedInView.classList.remove('hidden')
+  } else {
+    logInForm.innerHTML += 'Please refresh and enter a valid username and password'
+  }
+}
+
+function getTodaysDate() {
+  let date = new Date()
+  let day = date.getDate()
+  let month = date.getMonth() + 1
+  if (day < 10) {
+    day = `0${day}`
+  }
+  if (month < 10) {
+    month = `0${month}`
+  }
+  let today = `${month}-${day}-${date.getFullYear()}`
+  document.getElementById('date-input').setAttribute('min', today)
+}
+
+getTodaysDate()
