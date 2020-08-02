@@ -14,20 +14,28 @@ const mloginPopup = document.querySelector('.mlogin-popup');
 const mloginTrigger = document.querySelector('.mlogin-trigger');
 const mCloseButton = document.querySelector('.mclose-button');
 const changeViewButton = document.querySelector('.change-view-button');
+const loggedInView = document.querySelector('.logged-in-view')
+const mainView = document.querySelector('.main-view')
 
+window.addEventListener('load', onWindowLoad)
+window.addEventListener('click', windowOnClick);
 mloginTrigger.addEventListener('click', toggleModal);
 mCloseButton.addEventListener('click', toggleModal);
-window.addEventListener('click', windowOnClick);
 changeViewButton.addEventListener('click', viewLoggedInView)
+
+function onWindowLoad() {
+  if (JSON.parse(localStorage.getItem('loggedIn')) === true) {
+    showLoggedInView()
+  } else {
+    mainView.classList.remove('hidden')
+  }
+}
 
 function toggleModal() {
   mloginPopup.classList.toggle('show-modal');
 }
 
-function toggleLoggedInView() {
-  const loggedInView = document.querySelector('.logged-in-view')
-  const mainView = document.querySelector('.main-view')
-  toggleModal()
+function showLoggedInView() {
   loggedInView.classList.remove('hidden')
   mainView.classList.add('hidden')
 }
@@ -43,8 +51,8 @@ function viewLoggedInView(event) {
   api.getUsers();
   api.getRooms();
   api.getBookings();
-  // checkLogInDetails()
-  toggleLoggedInView()
+  checkLogInDetails()
+  // showLoggedInView()
 }
 
 function checkLogInDetails() {
@@ -54,13 +62,19 @@ function checkLogInDetails() {
   const logInForm = document.querySelector('.mcontent')
 // should check with input values be properties of User?
   if (username.value === 'manager' && password.value === 'overlook2020') {
-    toggleLoggedInView()
+    toggleModal()
+    showLoggedInView()
+    localStorage.setItem('loggedIn', true)
   } else if (username.value.includes('customer') && password.value === 'overlook2020') {
-    toggleLoggedInView()
+    toggleModal()
+    showLoggedInView()
+    localStorage.setItem('loggedIn', true)
   } else {
     logInForm.innerHTML += 'Please refresh and enter a valid username and password'
   }
 }
+
+
 
 function getTodaysDate() {
   let date = new Date()
