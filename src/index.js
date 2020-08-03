@@ -29,6 +29,7 @@ const mloginTrigger = document.querySelector('.mlogin-trigger');
 const modalCloseButton = document.querySelector('.mclose-button');
 const changeViewButton = document.querySelector('.change-view-button');
 const customerDashboardView = document.querySelector('.customer-dashboard-view')
+const managerDashboardView = document.querySelector('.manager-dashboard-view')
 const mainView = document.querySelector('.main-view')
 const logOutButton = document.querySelector('#log-out-button')
 
@@ -82,6 +83,11 @@ function checkLogInDetails() {
 // make this a toggle
 function showCustomerDashboard() {
   customerDashboardView.classList.remove('hidden')
+  mainView.classList.add('hidden')
+}
+
+function showManagerDashboard() {
+  managerDashboardView.classList.remove('hidden')
   mainView.classList.add('hidden')
 }
 
