@@ -60,7 +60,6 @@ describe('Hotel details', function() {
     const roomsAvailable = hotel.getAvailableRooms('2020/04/22', sampleBookings, sampleRooms)
     const singleRooms = hotel.getRoomsByType(roomsAvailable, 'single room')
 
-    console.log(singleRooms)
     expect(singleRooms.length).to.equal(13)
   });
 });
