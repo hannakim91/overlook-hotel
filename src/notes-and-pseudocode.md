@@ -29,3 +29,8 @@ from each reservation -- map over and add cost per night?
 **keep everything as dry as possible** - plug in different arays
 - maybe calculator class? --> call caclulator's methods in cust/manager
 - parent class for customer/manager -- has call functions from hotel/calculator
+
+**Customer select a room for booking**
+- first need to connect Hotel/calculation methods to Customer class and call methods from scripts?
+- where should this live?
+- POST request when hit "book" button
