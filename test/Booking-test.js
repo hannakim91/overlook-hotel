@@ -27,6 +27,9 @@ describe('Booking', function() {
   it('should have a userID', function () {
     expect(booking.userID).to.equal(32);
   });
+  it('should have a booking date', function() {
+    expect(booking.date).to.equal('2020/01/21')
+  })
   it('should have no room service charges as a default', function() {
     expect(booking.roomServiceCharges).to.deep.equal([])
   });
