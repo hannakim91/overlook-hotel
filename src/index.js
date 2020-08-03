@@ -22,7 +22,7 @@ window.addEventListener('load', onWindowLoad)
 window.addEventListener('click', windowOnClick);
 mloginTrigger.addEventListener('click', toggleModal);
 modalCloseButton.addEventListener('click', toggleModal);
-changeViewButton.addEventListener('click', viewLoggedInView)
+changeViewButton.addEventListener('click', viewDashboard);
 logOutButton.addEventListener('click', handleLogOutClick);
 
 function handleLogOutClick(event) {
@@ -34,7 +34,7 @@ function handleLogOutClick(event) {
 
 function onWindowLoad() {
   if (JSON.parse(localStorage.getItem('loggedIn')) === true) {
-    showLoggedInView()
+    showDashboard()
   } else {
     mainView.classList.remove('hidden')
   }
@@ -45,7 +45,7 @@ function toggleModal() {
 }
 
 // make this a toggle
-function showLoggedInView() {
+function showDashboard() {
   loggedInView.classList.remove('hidden')
   mainView.classList.add('hidden')
 }
@@ -56,28 +56,28 @@ function windowOnClick(event) {
   }
 }
 
-function viewLoggedInView(event) {
+function viewDashboard(event) {
   event.preventDefault();
   api.getUsers();
   api.getRooms();
   api.getBookings();
   checkLogInDetails()
-  // showLoggedInView()
+  // showDashboard()
 }
 
 function checkLogInDetails() {
   const username = document.querySelector('#username')
   const password = document.querySelector('#password')
-  const loggedInView = document.querySelector('.logged-in-view')
+  const dashboardView = document.querySelector('.dashboard-view')
   const logInForm = document.querySelector('.mcontent')
 // should check with input values be properties of User?
   if (username.value === 'manager' && password.value === 'overlook2020') {
     toggleModal()
-    showLoggedInView()
+    showDashboard()
     localStorage.setItem('loggedIn', true)
   } else if (username.value.includes('customer') && password.value === 'overlook2020') {
     toggleModal()
-    showLoggedInView()
+    showDashboard()
     localStorage.setItem('loggedIn', true)
   } else {
     logInForm.innerHTML += 'Please refresh and enter a valid username and password'
