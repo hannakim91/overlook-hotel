@@ -29,7 +29,6 @@ const api = {
         newFetchData.userData = response[0]
         newFetchData.roomData = response[1]
         newFetchData.bookingData = response[2]
-        console.log(newFetchData)
         return newFetchData
       })
       .catch(error => console.log(error))

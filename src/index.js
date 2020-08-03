@@ -14,11 +14,21 @@ import Booking from '../src/Booking';
 
 import api from './api.js'
 
+let customer = {}
+let currentUser;
+// this.username === username.value -- if no user found/error message
+
+let users = []
+api.getApiData()
+  .then(allData => {
+  console.log(allData.userData[0])
+  })
+
 const mloginPopup = document.querySelector('.mlogin-popup');
 const mloginTrigger = document.querySelector('.mlogin-trigger');
 const modalCloseButton = document.querySelector('.mclose-button');
 const changeViewButton = document.querySelector('.change-view-button');
-const dashboardView = document.querySelector('.dashboard-view')
+const customerDashboardView = document.querySelector('.customer-dashboard-view')
 const mainView = document.querySelector('.main-view')
 const logOutButton = document.querySelector('#log-out-button')
 
@@ -29,16 +39,9 @@ modalCloseButton.addEventListener('click', toggleModal);
 changeViewButton.addEventListener('click', viewDashboard);
 logOutButton.addEventListener('click', handleLogOutClick);
 
-function handleLogOutClick(event) {
-  mainView.classList.remove('hidden')
-  dashboardView.classList.add('hidden')
-  localStorage.setItem('loggedIn', false)
-  //clear local storage
-}
-
 function onWindowLoad() {
   if (JSON.parse(localStorage.getItem('loggedIn')) === true) {
-    showDashboard()
+    showCustomerDashboard()
   } else {
     mainView.classList.remove('hidden')
   }
@@ -48,29 +51,15 @@ function toggleModal() {
   mloginPopup.classList.toggle('show-modal');
 }
 
-// make this a toggle
-function showDashboard() {
-  dashboardView.classList.remove('hidden')
-  mainView.classList.add('hidden')
-}
-
 function windowOnClick(event) {
   if (event.target === mloginPopup) {
     toggleModal();
   }
 }
-let users = []
-api.getApiData().then(allData => {
-  allData.userData.forEach(user => {
-    users.push(user)
-  })
-})
-console.log(users)
-
 
 function viewDashboard(event) {
   event.preventDefault();
-
+  toggleModal()
   checkLogInDetails()
   // showDashboard()
 }
@@ -78,20 +67,29 @@ function viewDashboard(event) {
 function checkLogInDetails() {
   const username = document.querySelector('#username')
   const password = document.querySelector('#password')
-  const dashboardView = document.querySelector('.dashboard-view')
   const logInForm = document.querySelector('.mcontent')
 // should check with input values be properties of User?
   if (username.value === 'manager' && password.value === 'overlook2020') {
-    toggleModal()
-    showDashboard()
+    showManagerDashboard() // not yet a method
     localStorage.setItem('loggedIn', true)
   } else if (username.value.includes('customer') && password.value === 'overlook2020') {
-    toggleModal()
-    showDashboard()
+    showCustomerDashboard()
     localStorage.setItem('loggedIn', true)
   } else {
     logInForm.innerHTML += 'Please refresh and enter a valid username and password'
   }
+}
+// make this a toggle
+function showCustomerDashboard() {
+  customerDashboardView.classList.remove('hidden')
+  mainView.classList.add('hidden')
+}
+
+function handleLogOutClick(event) {
+  mainView.classList.remove('hidden')
+  customerDashboardView.classList.add('hidden')
+  localStorage.setItem('loggedIn', false)
+  //clear local storage
 }
 
 function getTodaysDate() {
