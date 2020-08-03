@@ -14,7 +14,7 @@ const mloginPopup = document.querySelector('.mlogin-popup');
 const mloginTrigger = document.querySelector('.mlogin-trigger');
 const modalCloseButton = document.querySelector('.mclose-button');
 const changeViewButton = document.querySelector('.change-view-button');
-const loggedInView = document.querySelector('.logged-in-view')
+const dashboardView = document.querySelector('.dashboard-view')
 const mainView = document.querySelector('.main-view')
 const logOutButton = document.querySelector('#log-out-button')
 
@@ -27,7 +27,7 @@ logOutButton.addEventListener('click', handleLogOutClick);
 
 function handleLogOutClick(event) {
   mainView.classList.remove('hidden')
-  loggedInView.classList.add('hidden')
+  dashboardView.classList.add('hidden')
   localStorage.setItem('loggedIn', false)
   //clear local storage
 }
@@ -46,7 +46,7 @@ function toggleModal() {
 
 // make this a toggle
 function showDashboard() {
-  loggedInView.classList.remove('hidden')
+  dashboardView.classList.remove('hidden')
   mainView.classList.add('hidden')
 }
 
