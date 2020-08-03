@@ -1,12 +1,15 @@
 import chai from 'chai';
 const expect = chai.expect;
 
+import Hotel from '../src/Hotel';
 import Customer from '../src/Customer';
 import sampleUsers from './data/sample-users';
 
 describe('Customer', function() {
+  let hotel;
   let customer;
   beforeEach(() => {
+    hotel = new Hotel();
     customer = new Customer(sampleUsers[0]);
   })
   it('should be a function', function() {
@@ -23,5 +26,8 @@ describe('Customer', function() {
   });
   it('should have a name', function() {
     expect(customer.name).to.equal('Leatha Ullrich')
-  })
+  });
+  it('should have hold a list of their bookings', function() {
+    expect(customer.bookings).to.deep.equal([])
+  }
 });

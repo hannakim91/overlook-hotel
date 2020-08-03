@@ -6,6 +6,7 @@ class Customer extends User {
     this.username = 'customer' + userData.id;
     this.id = userData.id;
     this.name = userData.name;
+    this.bookings = [];
   }
 
 
