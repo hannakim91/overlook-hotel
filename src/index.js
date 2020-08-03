@@ -18,11 +18,20 @@ let customer = {}
 let currentUser;
 // this.username === username.value -- if no user found/error message
 
+// promise lets function get called --- but since async - it says move on/keep loading page so consolelog doesnt show up yet
+//or userRepositorylike old project =-- ** do this with bookings/room repos**
 let users = []
-api.getApiData()
-  .then(allData => {
-  console.log(allData.userData[0])
+const apiData = api.getApiData()
+  .then(data => {
+    console.log(data)
+    //create instances of users...etc /
+    users = data.userData
   })
+  // fake database --> need to store it somewhere (global instances of repo classes for now)
+console.log(users)
+
+// calendar->pick date -> compare rooms in hotel vsbookings for date
+// dynamic web app pattern - page in loading state until api call finished
 
 const mloginPopup = document.querySelector('.mlogin-popup');
 const mloginTrigger = document.querySelector('.mlogin-trigger');
@@ -41,8 +50,9 @@ changeViewButton.addEventListener('click', viewDashboard);
 logOutButton.addEventListener('click', handleLogOutClick);
 
 function onWindowLoad() {
-  if (JSON.parse(localStorage.getItem('loggedIn')) === true) {
+  if (JSON.parse(localStorage.getItem('loggedIn')) === true && localStorage.getItem('userType') === 'customer') {
     showCustomerDashboard()
+  } else if (JSON.parse(localStorage.getItem('loggedIn')) === true && localStorage.getItem('userType') === 'manager') {
   } else {
     mainView.classList.remove('hidden')
   }
@@ -72,13 +82,23 @@ function checkLogInDetails() {
 // should check with input values be properties of User?
   if (username.value === 'manager' && password.value === 'overlook2020') {
     showManagerDashboard() // not yet a method
-    localStorage.setItem('loggedIn', true)
+    storeManagerData()
   } else if (username.value.includes('customer') && password.value === 'overlook2020') {
     showCustomerDashboard()
-    localStorage.setItem('loggedIn', true)
+    storeCustomerData()
   } else {
     logInForm.innerHTML += 'Please refresh and enter a valid username and password'
   }
+}
+
+function storeManagerData() {
+  localStorage.setItem('loggedIn', true)
+  localStorage.setItem('userType', 'manager')
+}
+
+function storeCustomerData() {
+  localStorage.setItem('loggedIn', true)
+  localStorage.setItem('userType', 'customer')
 }
 // make this a toggle
 function showCustomerDashboard() {
@@ -94,8 +114,9 @@ function showManagerDashboard() {
 function handleLogOutClick(event) {
   mainView.classList.remove('hidden')
   customerDashboardView.classList.add('hidden')
+  managerDashboardView.classList.add('hidden')
   localStorage.setItem('loggedIn', false)
-  //clear local storage
+  //not working for manager ATM
 }
 
 function getTodaysDate() {
