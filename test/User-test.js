@@ -14,7 +14,4 @@ describe('User', function() {
   it('should be an instance of User', function() {
     expect(user).to.be.an.instanceof(User);
   });
-  it('should have a default password', function() {
-    expect(user.password).to.equal('overlook2020');
-  });
 });

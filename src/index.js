@@ -8,6 +8,10 @@ import './css/base.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
+import Hotel from '../src/Hotel';
+import Customer from '../src/Customer';
+import Booking from '../src/Booking';
+
 import api from './api.js'
 
 const mloginPopup = document.querySelector('.mlogin-popup');
@@ -55,12 +59,18 @@ function windowOnClick(event) {
     toggleModal();
   }
 }
+let users = []
+api.getApiData().then(allData => {
+  allData.userData.forEach(user => {
+    users.push(user)
+  })
+})
+console.log(users)
+
 
 function viewLoggedInView(event) {
   event.preventDefault();
-  api.getUsers();
-  api.getRooms();
-  api.getBookings();
+
   checkLogInDetails()
   // showLoggedInView()
 }
@@ -83,8 +93,6 @@ function checkLogInDetails() {
     logInForm.innerHTML += 'Please refresh and enter a valid username and password'
   }
 }
-
-
 
 function getTodaysDate() {
   let date = new Date()
