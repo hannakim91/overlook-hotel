@@ -10,10 +10,13 @@ class Customer extends User {
     this.bookings = [];
   }
 
-  findBookings(hotel, bookingData) {
+  getMyBookingData(hotel, bookingData) {
     this.bookings = hotel.findUsersBookings(this.id, bookingData);
   }
 
+  seeAvailableRooms(hotel, date, bookingData, roomData) {
+    let availableRooms = hotel.getAvailableRooms(date, bookingData, roomData)
+  }
 }
 
 export default Customer

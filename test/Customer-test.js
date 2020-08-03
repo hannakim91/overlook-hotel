@@ -5,6 +5,7 @@ import Hotel from '../src/Hotel';
 import Customer from '../src/Customer';
 import sampleUsers from './data/sample-users';
 import sampleBookings from './data/sample-bookings';
+import sampleRooms from './data/sample-rooms';
 
 describe('Customer', function() {
   let hotel;
@@ -29,9 +30,17 @@ describe('Customer', function() {
     expect(customer.name).to.equal('Leatha Ullrich')
   });
   it('should hold a list of their bookings', function() {
-    customer.findBookings(hotel, sampleBookings)
+    customer.getMyBookingData(hotel, sampleBookings)
 
     expect(customer.bookings.length).to.equal(25)
     expect(customer.bookings[0].userID).to.equal(1)
+  });
+  it('should be able to add a new booking', function() {
+    customer.addBooking(hotel, '2021/01/01', sampleBookings, roomData)
+    expect(this.bookings.length).to.equal(26)
+  });
+  it('should receive a verbose apology if a desired room is unavailable/not get a new booking added', function() {
+    customer.addBooking()
+    expect(this.bookings.length).to.equal(25)
   });
 });
