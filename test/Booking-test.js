@@ -16,5 +16,8 @@ describe('Booking', function() {
   });
   it('should have a default id', function() {
     expect(booking.id).to.equal('5fwrgu4i7k55hl6t8');
+  });
+  it('should have no room service charges as a default', function() {
+    expect(booking.roomServiceCharges).to.deep.equal([])
   })
 });
