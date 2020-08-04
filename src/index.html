@@ -25,16 +25,6 @@
     </article>
 
     <article class="customer-dashboard-view hidden">
-      <h1 class="customer-header"></h1>
-      <section>
-        <h2>Your Bookings:</h2>
-          <p></p>
-        <h3>Past Bookings</h3>
-          <p></p>
-        <h3>Upcoming Bookings</h3>
-          <p></p>
-        <h4>Total Spending at The Overlook Hotel</h4>
-      </section>
       <section id="select-dates-container">
         <label class="booking-date" for="user-booking-date-input">Book A Stay:<label>
         <input type="date" id="date-input" placeholder="mm/dd/yyyy" min="01-01-2020" max="12-31-2025">
@@ -60,7 +50,7 @@
       </section>
       <section id="select-dates-container">
         <label class="booking-date" for="user-booking-date-input">Book A Stay:<label>
-        <input type="date" id="date-input" placeholder="mm/dd/yyyy" min="01-01-2020" max="12-31-2025">
+        <input type="date" id="date-input" placeholder="yyyy/mm/dd" min="2020/01/01" max="2025/12/31">
         <button type="button" id="search-date-button" aria-label="Add search Date">Search availability</button>
       </section>
       <button onclick="handleLogOutClick()" class="log-out-button">Log Out</button>

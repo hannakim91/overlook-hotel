@@ -109,7 +109,33 @@ function showCustomerDashboard() {
 }
 
 function populateCustomerDashboard() {
-  customerDashboardView.innerHTML += `${hotel.users[0].name}`
+  const userBookings = hotel.findUserBookings(hotel.users[1].id)
+  console.log(userBookings)
+  let upcomingBookings = '<ul>'
+  let pastBookings = '<ul>'
+  userBookings.forEach(booking => {
+    if (booking.date >= getTodaysDate()) {
+      upcomingBookings += '<li>' + booking.date + ': Room ' + booking.roomNumber + '</li>'
+    } else {
+      pastBookings += '<li>' + booking.date + ': Room ' + booking.roomNumber + '</li>'
+    }
+  })
+  upcomingBookings += '</ul>'
+  pastBookings += '</ul>'
+  console.log('upcomingBookings', upcomingBookings)
+
+  customerDashboardView.innerHTML += `
+    <h1 class="customer-header">Hello ${hotel.users[1].name}!</h1>
+    <section>
+      <h2>Your Bookings</h2>
+        <h3>Upcoming Bookings:</h3>
+          <p>${upcomingBookings}</p>
+        <h3>Past Bookings:</h3>
+          <p>${pastBookings}</p>
+        <h3>Total Spending at The Overlook Hotel:</h3>
+          <p>$${hotel.calculateUserSpending(hotel.users[1].id)}</p>
+
+    </section>`
 }
 
 function showManagerDashboard() {
@@ -137,8 +163,10 @@ function getTodaysDate() {
   if (month < 10) {
     month = `0${month}`
   }
-  let today = `${month}-${day}-${date.getFullYear()}`
+  let today = `${date.getFullYear()}/${month}/${day}`
   document.getElementById('date-input').setAttribute('min', today)
+  console.log(today)
+  return today
 }
 
 getTodaysDate()
