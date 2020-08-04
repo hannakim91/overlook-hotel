@@ -151,14 +151,18 @@ function populateCustomerDashboard() {
 function searchForRooms(event) {
   const dateInput = document.querySelector('#date-input')
   const customerBookingInfo = document.querySelector('.customer-booking-info')
+  const date = dateInput.value.replace(/-/g, '/')
 
   if (event.target.id === 'search-date-button') {
-    console.log(dateInput.value)
     customerBookingInfo.classList.add('hidden')
-    customerDashboardView.innerHTML += `
-      <section class="customer-search-results">
-        ${hotel.getAvailableRooms}
-      </section>`
+    if (date <= getTodaysDate()) {
+      customerDashboardView.innerHTML += `You can only see available rooms for ${getTodaysDate()} and beyond.`
+    } else {
+      customerDashboardView.innerHTML += `
+        <section class="customer-search-results">
+          hi
+        </section>`
+    }
   }
 }
 
