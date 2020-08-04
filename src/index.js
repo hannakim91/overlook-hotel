@@ -48,10 +48,15 @@ mloginTrigger.addEventListener('click', toggleModal);
 modalCloseButton.addEventListener('click', toggleModal);
 changeViewButton.addEventListener('click', viewDashboard);
 
+// function parseLocalStorage() {
+//
+// }
+
 function onWindowLoad() {
-  if (JSON.parse(localStorage.getItem('loggedIn')) === true && localStorage.getItem('userType') === 'customer') {
+  const user = localStorage.getItem('user')
+  if (JSON.parse(localStorage.getItem('loggedIn')) === true && user.includes('customer')) {
     showCustomerDashboard()
-  } else if (JSON.parse(localStorage.getItem('loggedIn')) === true && localStorage.getItem('userType') === 'manager') {
+  } else if (JSON.parse(localStorage.getItem('loggedIn')) === true && localStorage.getItem('user') === 'manager') {
     showManagerDashboard()
   } else {
     mainView.classList.remove('hidden')
@@ -96,13 +101,15 @@ function checkLogInDetails() {
 
 function storeManagerData() {
   localStorage.setItem('loggedIn', true)
-  localStorage.setItem('userType', 'manager')
+  localStorage.setItem('user', 'manager')
 }
 
 function storeCustomerData() {
   localStorage.setItem('loggedIn', true)
-  localStorage.setItem('userType', 'customer')
+  localStorage.setItem('user', 'customer')
 }
+
+
 // make this a toggle
 function showCustomerDashboard() {
   customerDashboardView.classList.remove('hidden')
@@ -168,7 +175,7 @@ function searchForRooms(event) {
     if (date < getTodaysDate()) {
       searchResults.innerHTML += `You can only see available rooms for ${getTodaysDate()} and beyond.`
     } else if (roomsOpen.length === 0) {
-      searchResults.innerHTML = `So very extremely and relentlessly sorry to bring to your awareness that there are no rooms available for ${date}. We humbly suggest considering a different date at your leisure if there is an inkling of a possibility of any flexibility.`
+      searchResults.innerHTML = `So very extremely and relentlessly sorry to bring to your awareness that there are no rooms available for ${date}. We humbly suggest considering a different date at your leisure if there is an inkling of a possibility of any flexibility. Sorry.`
     } else {
       searchResults.innerHTML = `
         <section class="customer-search-results">

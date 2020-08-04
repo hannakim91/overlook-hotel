@@ -52,7 +52,12 @@ from each reservation -- map over and add cost per night?
 // calendar->pick date -> compare rooms in hotel vsbookings for date
 // dynamic web app pattern - page in loading state until api call finished
 **display customer dashboard**
-```populateCustomerDashboard()```
+populateCustomerDashboard()
 how to get out of objectObject -- can't post arrays -- maybe array -> string and turn it into an unordered list via HTML?
 also want Hotel method to add this data to customer instance and populate HTML from there instead of hotel
 and only display date, room number, roomservice charges (map)
+### still need to match right user logged in to user info displayed!!!!
+
+**get to search results page**
+- also need some buttons to view/hide different rooms by getRoomsByType
+- be able to select a room to book
