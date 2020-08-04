@@ -34,3 +34,20 @@ from each reservation -- map over and add cost per night?
 - first need to connect Hotel/calculation methods to Customer class and call methods from scripts?
 - where should this live?
 - POST request when hit "book" button
+**fetching and using API data**
+// repo could live inside Hotel
+//manager vs customer -- access all info vs just themselves
+// Bookings - class
+// separation: hotel doesn't want user to see all data -- therefore don't want repo's as global variables
+// if manager/customer..
+
+
+// this.username === username.value -- if no user found/error message
+
+// promise lets function get called --- but since async - it says move on/keep loading page so consolelog doesnt show up yet
+//or userRepositorylike old project =-- ** do this with bookings/room repos**
+
+// fake database --> need to store it somewhere (global instances of repo classes for now)
+
+// calendar->pick date -> compare rooms in hotel vsbookings for date
+// dynamic web app pattern - page in loading state until api call finished

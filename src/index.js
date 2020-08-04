@@ -14,43 +14,24 @@ import Booking from '../src/Booking';
 
 import api from './api.js'
 
-// repo could live inside Hotel
-//manager vs customer -- access all info vs just themselves
-// Bookings - class
-// separation: hotel doesn't want user to see all data -- therefore don't want repo's as global variables
-// if manager/customer..
-
-const customerRepository = []
-const roomRepository = []
-const bookingRepository = []
-const hotel = new Hotel(roomRepository, customerRepository, bookingRepository)
-
-// this.username === username.value -- if no user found/error message
-
-// promise lets function get called --- but since async - it says move on/keep loading page so consolelog doesnt show up yet
-//or userRepositorylike old project =-- ** do this with bookings/room repos**
+const hotel = new Hotel()
 
 function apiData() {
   api.getApiData()
     .then(data => {
-      console.log(data)
       data.userData.forEach(user => {
-        customerRepository.push(new Customer(user))
+        hotel.users.push(new Customer(user))
       })
       data.roomData.forEach(room => {
-        roomRepository.push(room)
+        hotel.rooms.push(room)
       })
       // if not turning into objects -- don't need foreach loops
       data.bookingData.forEach(booking => {
-        bookingRepository.push(booking)
+        hotel.bookings.push(booking)
       })
     })
-    .then(() => console.log('hi', hotel.findUserBookings(1)))
+    .then(() => populateCustomerDashboard())
 }
-  // fake database --> need to store it somewhere (global instances of repo classes for now)
-
-// calendar->pick date -> compare rooms in hotel vsbookings for date
-// dynamic web app pattern - page in loading state until api call finished
 
 const mloginPopup = document.querySelector('.mlogin-popup');
 const mloginTrigger = document.querySelector('.mlogin-trigger');
@@ -59,14 +40,14 @@ const changeViewButton = document.querySelector('.change-view-button');
 const customerDashboardView = document.querySelector('.customer-dashboard-view')
 const managerDashboardView = document.querySelector('.manager-dashboard-view')
 const mainView = document.querySelector('.main-view')
-// const logOutButton = document.querySelectorAll('.log-out-button')
+const logOutButton = document.querySelector('.log-out-button')
 
 window.addEventListener('load', onWindowLoad)
 window.addEventListener('click', windowOnClick);
 mloginTrigger.addEventListener('click', toggleModal);
 modalCloseButton.addEventListener('click', toggleModal);
 changeViewButton.addEventListener('click', viewDashboard);
-// logOutButton.addEventListener('click', handleLogOutClick);
+logOutButton.addEventListener('click', handleLogOutClick);
 
 function onWindowLoad() {
   if (JSON.parse(localStorage.getItem('loggedIn')) === true && localStorage.getItem('userType') === 'customer') {
@@ -76,7 +57,6 @@ function onWindowLoad() {
   } else {
     mainView.classList.remove('hidden')
   }
-  apiData()
 }
 
 function toggleModal() {
@@ -125,6 +105,11 @@ function storeCustomerData() {
 function showCustomerDashboard() {
   customerDashboardView.classList.remove('hidden')
   mainView.classList.add('hidden')
+  apiData()
+}
+
+function populateCustomerDashboard() {
+  customerDashboardView.innerHTML += `${hotel.users[0].name}`
 }
 
 function showManagerDashboard() {
@@ -134,11 +119,10 @@ function showManagerDashboard() {
 
 function handleLogOutClick(event) {
   localStorage.setItem('loggedIn', false)
-
   managerDashboardView.classList.add('hidden')
   customerDashboardView.classList.add('hidden')
   mainView.classList.remove('hidden')
-  //not working for manager ATM
+  //not working for manager ATM -- need to do querySelectorAll and loop in eventhandler function
 }
 
 
