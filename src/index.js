@@ -53,7 +53,8 @@ changeViewButton.addEventListener('click', viewDashboard);
 // }
 
 function onWindowLoad() {
-  const user = localStorage.getItem('user')
+  let user = localStorage.getItem('user')
+  console.log(user)
   if (JSON.parse(localStorage.getItem('loggedIn')) === true && user.includes('customer')) {
     showCustomerDashboard()
   } else if (JSON.parse(localStorage.getItem('loggedIn')) === true && localStorage.getItem('user') === 'manager') {
@@ -92,7 +93,7 @@ function checkLogInDetails() {
     showManagerDashboard() // not yet a method
     storeManagerData()
   } else if (username.value.includes('customer') && password.value === 'overlook2020') {
-    storeCustomerData()
+    storeCustomerData(username.value)
     showCustomerDashboard()
   } else {
     logInForm.innerHTML += 'Please refresh and enter a valid username and password'
@@ -104,9 +105,9 @@ function storeManagerData() {
   localStorage.setItem('user', 'manager')
 }
 
-function storeCustomerData() {
+function storeCustomerData(username) {
   localStorage.setItem('loggedIn', true)
-  localStorage.setItem('user', 'customer')
+  localStorage.setItem('user', username)
 }
 
 
