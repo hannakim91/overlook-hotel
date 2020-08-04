@@ -41,14 +41,12 @@ const changeViewButton = document.querySelector('.change-view-button');
 const customerDashboardView = document.querySelector('.customer-dashboard-view');
 const managerDashboardView = document.querySelector('.manager-dashboard-view');
 const mainView = document.querySelector('.main-view');
-const searchDateButton = document.querySelector('#search-date-button');
 
 window.addEventListener('load', onWindowLoad);
 window.addEventListener('click', windowOnClick);
 mloginTrigger.addEventListener('click', toggleModal);
 modalCloseButton.addEventListener('click', toggleModal);
 changeViewButton.addEventListener('click', viewDashboard);
-searchDateButton.addEventListener('click', searchForRooms);
 
 function onWindowLoad() {
   if (JSON.parse(localStorage.getItem('loggedIn')) === true && localStorage.getItem('userType') === 'customer') {
@@ -70,7 +68,7 @@ function windowOnClick(event) {
     toggleModal();
   }
   handleLogOutClick(event);
-
+  searchForRooms(event);
 }
 
 function viewDashboard(event) {
@@ -136,20 +134,32 @@ function populateCustomerDashboard() {
   const userBookings = hotel.findUserBookings(hotel.users[1].id)
 
   customerDashboardView.innerHTML += `
-    <h1 class="customer-header">Hello ${hotel.users[1].name}!</h1>
-    <section>
-      <h2>Your Bookings</h2>
-        <h3>Upcoming Bookings:</h3>
-          <p>${createUpcomingBookingsDisplay(userBookings)}</p>
-        <h3>Past Bookings:</h3>
-          <p>${createPastBookingsDisplay(userBookings)}</p>
-        <h3>Total Spending at The Overlook Hotel:</h3>
-          <p>$${hotel.calculateUserSpending(hotel.users[1].id)}</p>
+    <section class="customer-booking-info">
+      <h1 class="customer-header">Hello ${hotel.users[1].name}!</h1>
+      <section>
+        <h2>Your Bookings</h2>
+          <h3>Upcoming Bookings:</h3>
+            <p>${createUpcomingBookingsDisplay(userBookings)}</p>
+          <h3>Past Bookings:</h3>
+            <p>${createPastBookingsDisplay(userBookings)}</p>
+          <h3>Total Spending at The Overlook Hotel:</h3>
+            <p>$${hotel.calculateUserSpending(hotel.users[1].id)}</p>
+      </section>
     </section>`
 }
 
-function searchForRooms() {
-  console.log('hi')
+function searchForRooms(event) {
+  const dateInput = document.querySelector('#date-input')
+  const customerBookingInfo = document.querySelector('.customer-booking-info')
+
+  if (event.target.id === 'search-date-button') {
+    console.log(dateInput.value)
+    customerBookingInfo.classList.add('hidden')
+    customerDashboardView.innerHTML += `
+      <section class="customer-search-results">
+        ${hotel.getAvailableRooms}
+      </section>`
+  }
 }
 
 function showManagerDashboard() {

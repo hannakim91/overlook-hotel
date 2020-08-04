@@ -53,9 +53,9 @@ class Hotel {
     }, 0)
   }
 
-  getAvailableRooms(date, bookingData, roomData) {
-    let bookingsOnDate = this.getBookingData(date, bookingData)
-    let rooms = roomData.reduce((roomsBooked, room) => {
+  getAvailableRooms(date) {
+    let bookingsOnDate = this.getBookingData(date, this.bookings)
+    let rooms = this.rooms.reduce((roomsBooked, room) => {
       bookingsOnDate.forEach(booking => {
         if (booking.roomNumber === room.number) {
           roomsBooked.push(room)
@@ -63,7 +63,7 @@ class Hotel {
       })
       return roomsBooked
     }, [])
-    return roomData.filter(room => !rooms.includes(room))
+    return this.rooms.filter(room => !rooms.includes(room))
   }
 
   getRoomsByType(roomsAvailable, roomType) {
