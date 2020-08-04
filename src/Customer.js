@@ -13,7 +13,10 @@ class Customer extends User {
   getMyBookingData(hotel, bookingData) {
     this.bookings = hotel.findUsersBookings(this.id, bookingData);
   }
-  // move this to hotel -> hotel calls user - -user would be asking how much i spent to 
+  // get rid of these methods
+  // when instantiate new customer: run hotel.findUserBookings on DOM/elsewhere
+  // get booking data using their Id
+
 
   seeAvailableRooms(hotel, date, bookingData, roomData) {
     let availableRooms = hotel.getAvailableRooms(date, bookingData, roomData)

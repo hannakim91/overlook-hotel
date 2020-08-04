@@ -14,21 +14,42 @@ import Booking from '../src/Booking';
 
 import api from './api.js'
 
-let customer = {}
-let currentUser;
+const hotel = new Hotel()
+// repo could live inside Hotel
+//manager vs customer -- access all info vs just themselves
+// Bookings - class
+// separation: hotel doesn't want user to see all data -- therefore don't want repo's as global variables
+// if manager/customer..
+
+let customerRepository = []
+let roomRepository = []
+let bookingRepository = []
+
 // this.username === username.value -- if no user found/error message
 
 // promise lets function get called --- but since async - it says move on/keep loading page so consolelog doesnt show up yet
 //or userRepositorylike old project =-- ** do this with bookings/room repos**
-let users = []
-const apiData = api.getApiData()
-  .then(data => {
-    console.log(data)
-    //create instances of users...etc /
-    users = data.userData
-  })
+
+function apiData() {
+  api.getApiData()
+    .then(data => {
+      console.log(data)
+      data.userData.forEach(user => {
+        customerRepository.push(new Customer(user))
+      })
+      data.roomData.forEach(room => {
+        roomRepository.push(room)
+      })
+      // if not turning into objects -- don't need foreach loops
+      data.bookingData.forEach(booking => {
+        bookingRepository.push(booking)
+      })
+    })
+    .then(() => console.log('hi'))
+}
   // fake database --> need to store it somewhere (global instances of repo classes for now)
-console.log(users)
+
+console.log('hay', hotel.findUsersBookings(1, bookingRepository))
 
 // calendar->pick date -> compare rooms in hotel vsbookings for date
 // dynamic web app pattern - page in loading state until api call finished
@@ -40,22 +61,24 @@ const changeViewButton = document.querySelector('.change-view-button');
 const customerDashboardView = document.querySelector('.customer-dashboard-view')
 const managerDashboardView = document.querySelector('.manager-dashboard-view')
 const mainView = document.querySelector('.main-view')
-const logOutButton = document.querySelector('#log-out-button')
+// const logOutButton = document.querySelectorAll('.log-out-button')
 
 window.addEventListener('load', onWindowLoad)
 window.addEventListener('click', windowOnClick);
 mloginTrigger.addEventListener('click', toggleModal);
 modalCloseButton.addEventListener('click', toggleModal);
 changeViewButton.addEventListener('click', viewDashboard);
-logOutButton.addEventListener('click', handleLogOutClick);
+// logOutButton.addEventListener('click', handleLogOutClick);
 
 function onWindowLoad() {
   if (JSON.parse(localStorage.getItem('loggedIn')) === true && localStorage.getItem('userType') === 'customer') {
     showCustomerDashboard()
   } else if (JSON.parse(localStorage.getItem('loggedIn')) === true && localStorage.getItem('userType') === 'manager') {
+    showManagerDashboard()
   } else {
     mainView.classList.remove('hidden')
   }
+  apiData()
 }
 
 function toggleModal() {
@@ -84,8 +107,8 @@ function checkLogInDetails() {
     showManagerDashboard() // not yet a method
     storeManagerData()
   } else if (username.value.includes('customer') && password.value === 'overlook2020') {
-    showCustomerDashboard()
     storeCustomerData()
+    showCustomerDashboard()
   } else {
     logInForm.innerHTML += 'Please refresh and enter a valid username and password'
   }
@@ -112,12 +135,15 @@ function showManagerDashboard() {
 }
 
 function handleLogOutClick(event) {
-  mainView.classList.remove('hidden')
-  customerDashboardView.classList.add('hidden')
-  managerDashboardView.classList.add('hidden')
   localStorage.setItem('loggedIn', false)
+
+  managerDashboardView.classList.add('hidden')
+  customerDashboardView.classList.add('hidden')
+  mainView.classList.remove('hidden')
   //not working for manager ATM
 }
+
+
 
 function getTodaysDate() {
   let date = new Date()

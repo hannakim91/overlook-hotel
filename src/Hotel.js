@@ -1,5 +1,7 @@
 class Hotel {
-  constructor() {}
+  constructor(roomData, bookingData, userData) {
+    this.rooms = roomData;
+  }
 
   getBookingData(date, data) {
     let bookings = data.filter(booking => booking.date === date)
