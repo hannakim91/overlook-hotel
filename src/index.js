@@ -33,6 +33,7 @@ function apiData() {
     .then(() => populateCustomerDashboard())
 }
 
+// document = everything on page therefore can't select something that isn't already on the doc -- need to use a diff way to target at another time
 const mloginPopup = document.querySelector('.mlogin-popup');
 const mloginTrigger = document.querySelector('.mlogin-trigger');
 const modalCloseButton = document.querySelector('.mclose-button');
@@ -40,7 +41,6 @@ const changeViewButton = document.querySelector('.change-view-button');
 const customerDashboardView = document.querySelector('.customer-dashboard-view');
 const managerDashboardView = document.querySelector('.manager-dashboard-view');
 const mainView = document.querySelector('.main-view');
-const logOutButton = document.getElementById('log-out-button');
 const searchDateButton = document.querySelector('#search-date-button');
 
 window.addEventListener('load', onWindowLoad);
@@ -48,7 +48,6 @@ window.addEventListener('click', windowOnClick);
 mloginTrigger.addEventListener('click', toggleModal);
 modalCloseButton.addEventListener('click', toggleModal);
 changeViewButton.addEventListener('click', viewDashboard);
-logOutButton.addEventListener('click', handleLogOutClick);
 searchDateButton.addEventListener('click', searchForRooms);
 
 function onWindowLoad() {
@@ -70,6 +69,8 @@ function windowOnClick(event) {
   if (event.target === mloginPopup) {
     toggleModal();
   }
+  handleLogOutClick(event);
+
 }
 
 function viewDashboard(event) {
@@ -156,15 +157,22 @@ function showManagerDashboard() {
   mainView.classList.add('hidden')
 }
 
+//event bubbling
+// click handler function - if event.target === logOutButton
+ // calls display functions
 
-
-function handleLogOutClick() {
-  console.log('hi')
-  localStorage.setItem('loggedIn', false)
-  managerDashboardView.classList.add('hidden')
-  customerDashboardView.classList.add('hidden')
-  mainView.classList.remove('hidden')
-  //not working for manager ATM -- need to do querySelectorAll and loop in eventhandler function
+ //cant recognize eventhandler but can register event.target.id --- now handlelogoutclick only getting called on click -- creation phase (variable and function declarations) - article not available yet on window load
+//within clickhandler function: looking at what you're clicking on /now -- at time of event/ and seeing if it meets condition
+//no variable assignment happening ---
+// id !== function or variable - it doesn't need to be assigned
+function handleLogOutClick(event) {
+  if (event.target.id === 'log-out-button') {
+    localStorage.setItem('loggedIn', false)
+    managerDashboardView.classList.add('hidden')
+    customerDashboardView.classList.add('hidden')
+    mainView.classList.remove('hidden')
+  }
+  //not working for manager ATM -- event.target.classlist.contains -- make it class instead
 }
 
 function getTodaysDate() {
