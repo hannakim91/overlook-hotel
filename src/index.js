@@ -161,14 +161,15 @@ function searchForRooms(event) {
   const customerBookingInfo = document.querySelector('.customer-booking-info')
   const searchResults = document.querySelector('.search-results')
   const date = dateInput.value.replace(/-/g, '/')
+  const roomsOpen = hotel.getAvailableRooms(date)
 
   if (event.target.id === 'search-date-button') {
     customerBookingInfo.classList.add('hidden')
     if (date < getTodaysDate()) {
       searchResults.innerHTML += `You can only see available rooms for ${getTodaysDate()} and beyond.`
+    } else if (roomsOpen.length === 0) {
+      searchResults.innerHTML = `So very extremely and relentlessly sorry to bring to your awareness that there are no rooms available for ${date}. We humbly suggest considering a different date at your leisure if there is an inkling of a possibility of any flexibility.`
     } else {
-      console.log(date)
-      let roomsOpen = hotel.getAvailableRooms(date)
       searchResults.innerHTML = `
         <section class="customer-search-results">
           ${availableRoomsDisplay(roomsOpen)}
