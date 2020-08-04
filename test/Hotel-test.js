@@ -28,6 +28,10 @@ describe('Hotel details', function() {
     expect(hotel.users.length).to.equal(50)
     expect(hotel.users[2].name).to.equal('Kelvin Schiller')
   })
+  it('should have a list of bookings', function() {
+    expect(hotel.bookings.length).to.equal(1004)
+    expect(hotel.bookings[1003].roomNumber).to.equal(6)
+  })
   it('should calculate how many rooms are available for a given date', function() {
     const numberOfRooms = hotel.findRoomsAvailable('2020/04/22', sampleBookings)
     const numberRooms = hotel.findRoomsAvailable('2025/01/05', sampleBookings)
