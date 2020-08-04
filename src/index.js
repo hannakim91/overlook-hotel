@@ -37,17 +37,19 @@ const mloginPopup = document.querySelector('.mlogin-popup');
 const mloginTrigger = document.querySelector('.mlogin-trigger');
 const modalCloseButton = document.querySelector('.mclose-button');
 const changeViewButton = document.querySelector('.change-view-button');
-const customerDashboardView = document.querySelector('.customer-dashboard-view')
-const managerDashboardView = document.querySelector('.manager-dashboard-view')
-const mainView = document.querySelector('.main-view')
-const logOutButton = document.querySelector('.log-out-button')
+const customerDashboardView = document.querySelector('.customer-dashboard-view');
+const managerDashboardView = document.querySelector('.manager-dashboard-view');
+const mainView = document.querySelector('.main-view');
+const logOutButton = document.getElementById('log-out-button');
+const searchDateButton = document.querySelector('#search-date-button');
 
-window.addEventListener('load', onWindowLoad)
+window.addEventListener('load', onWindowLoad);
 window.addEventListener('click', windowOnClick);
 mloginTrigger.addEventListener('click', toggleModal);
 modalCloseButton.addEventListener('click', toggleModal);
 changeViewButton.addEventListener('click', viewDashboard);
 logOutButton.addEventListener('click', handleLogOutClick);
+searchDateButton.addEventListener('click', searchForRooms);
 
 function onWindowLoad() {
   if (JSON.parse(localStorage.getItem('loggedIn')) === true && localStorage.getItem('userType') === 'customer') {
@@ -64,6 +66,7 @@ function toggleModal() {
 }
 
 function windowOnClick(event) {
+  console.log(event.target)
   if (event.target === mloginPopup) {
     toggleModal();
   }
@@ -141,8 +144,11 @@ function populateCustomerDashboard() {
           <p>${createPastBookingsDisplay(userBookings)}</p>
         <h3>Total Spending at The Overlook Hotel:</h3>
           <p>$${hotel.calculateUserSpending(hotel.users[1].id)}</p>
-
     </section>`
+}
+
+function searchForRooms() {
+  console.log('hi')
 }
 
 function showManagerDashboard() {
@@ -150,15 +156,16 @@ function showManagerDashboard() {
   mainView.classList.add('hidden')
 }
 
-function handleLogOutClick(event) {
+
+
+function handleLogOutClick() {
+  console.log('hi')
   localStorage.setItem('loggedIn', false)
   managerDashboardView.classList.add('hidden')
   customerDashboardView.classList.add('hidden')
   mainView.classList.remove('hidden')
   //not working for manager ATM -- need to do querySelectorAll and loop in eventhandler function
 }
-
-
 
 function getTodaysDate() {
   let date = new Date()
@@ -172,7 +179,6 @@ function getTodaysDate() {
   }
   let today = `${date.getFullYear()}/${month}/${day}`
   document.getElementById('date-input').setAttribute('min', today)
-  console.log(today)
   return today
 }
 
