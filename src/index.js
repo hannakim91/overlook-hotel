@@ -53,7 +53,7 @@ changeViewButton.addEventListener('click', viewDashboard);
 // }
 
 function onWindowLoad() {
-  let user = localStorage.getItem('user')
+  const user = localStorage.getItem('user')
   console.log(user)
   if (JSON.parse(localStorage.getItem('loggedIn')) === true && user.includes('customer')) {
     showCustomerDashboard()
@@ -139,11 +139,15 @@ function createPastBookingsDisplay(bookings) {
 }
 
 function populateCustomerDashboard() {
-  const userBookings = hotel.findUserBookings(hotel.users[1].id)
+  // match localstorage user to customer.username
+  const loggedInUser = localStorage.getItem('user')
+  const userToDisplay = hotel.users.find(user => user.username === loggedInUser)
+  console.log(userToDisplay)
+  const userBookings = hotel.findUserBookings(userToDisplay.id)
 
   customerDashboardView.innerHTML += `
     <section class="customer-booking-info">
-      <h1 class="customer-header">Hello ${hotel.users[1].name}!</h1>
+      <h1 class="customer-header">Hello ${userToDisplay.name}!</h1>
       <section>
         <h2>Your Bookings</h2>
           <h3>Upcoming Bookings:</h3>
@@ -151,7 +155,7 @@ function populateCustomerDashboard() {
           <h3>Past Bookings:</h3>
             <p>${createPastBookingsDisplay(userBookings)}</p>
           <h3>Total Spending at The Overlook Hotel:</h3>
-            <p>$${hotel.calculateUserSpending(hotel.users[1].id)}</p>
+            <p>$${hotel.calculateUserSpending(userToDisplay.id).toFixed(2)}</p>
       </section>
     </section>`
 }
