@@ -108,30 +108,37 @@ function showCustomerDashboard() {
   apiData()
 }
 
-function populateCustomerDashboard() {
-  const userBookings = hotel.findUserBookings(hotel.users[1].id)
-  console.log(userBookings)
+function createUpcomingBookingsDisplay(bookings) {
   let upcomingBookings = '<ul>'
-  let pastBookings = '<ul>'
-  userBookings.forEach(booking => {
+  bookings.forEach(booking => {
     if (booking.date >= getTodaysDate()) {
       upcomingBookings += '<li>' + booking.date + ': Room ' + booking.roomNumber + '</li>'
-    } else {
+    }
+  })
+  return upcomingBookings += '</ul>'
+}
+
+function createPastBookingsDisplay(bookings) {
+  let pastBookings = '<ul>'
+  bookings.forEach(booking => {
+    if (booking.date < getTodaysDate()) {
       pastBookings += '<li>' + booking.date + ': Room ' + booking.roomNumber + '</li>'
     }
   })
-  upcomingBookings += '</ul>'
-  pastBookings += '</ul>'
-  console.log('upcomingBookings', upcomingBookings)
+  return pastBookings += '</ul>'
+}
+
+function populateCustomerDashboard() {
+  const userBookings = hotel.findUserBookings(hotel.users[1].id)
 
   customerDashboardView.innerHTML += `
     <h1 class="customer-header">Hello ${hotel.users[1].name}!</h1>
     <section>
       <h2>Your Bookings</h2>
         <h3>Upcoming Bookings:</h3>
-          <p>${upcomingBookings}</p>
+          <p>${createUpcomingBookingsDisplay(userBookings)}</p>
         <h3>Past Bookings:</h3>
-          <p>${pastBookings}</p>
+          <p>${createPastBookingsDisplay(userBookings)}</p>
         <h3>Total Spending at The Overlook Hotel:</h3>
           <p>$${hotel.calculateUserSpending(hotel.users[1].id)}</p>
 
