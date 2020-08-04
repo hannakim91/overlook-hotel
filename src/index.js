@@ -180,7 +180,7 @@ function searchForRooms(event) {
     if (date < getTodaysDate()) {
       searchResults.innerHTML += `You can only see available rooms for ${getTodaysDate()} and beyond.`
     } else if (roomsOpen.length === 0) {
-      searchResults.innerHTML = `So very extremely and relentlessly sorry to bring to your awareness that there are no rooms available for ${date}. We humbly suggest considering a different date at your leisure if there is an inkling of a possibility of any flexibility. Sorry.`
+      searchResults.innerHTML = `So very extremely and relentlessly sorry to bring to your awareness that there are no rooms available for ${date}. We humbly suggest considering a different date at your leisure if there is an inkling of a possibility of any flexibility in your schedule. Sorry!!!!`
     } else {
       searchResults.innerHTML = `
         <section class="customer-search-results">
