@@ -29,12 +29,12 @@ describe('Customer', function() {
   it('should have a name', function() {
     expect(customer.name).to.equal('Leatha Ullrich')
   });
-  it('should hold a list of their bookings', function() {
-    customer.getMyBookingData(hotel, sampleBookings)
-
-    expect(customer.bookings.length).to.equal(25)
-    expect(customer.bookings[0].userID).to.equal(1)
-  });
+  // it('should hold a list of their bookings', function() {
+  //   customer.getMyBookingData(hotel, 1)
+  //
+  //   expect(customer.bookings.length).to.equal(25)
+  //   expect(customer.bookings[0].userID).to.equal(1)
+  // });
   // it('should be able to add a new booking', function() {
   //   customer.addBooking(hotel, '2021/01/01', sampleBookings, roomData)
   //   expect(this.bookings.length).to.equal(26)
