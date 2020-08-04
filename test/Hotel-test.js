@@ -11,7 +11,7 @@ const expect = chai.expect;
 describe('Hotel details', function() {
   let hotel;
   beforeEach(() => {
-    hotel = new Hotel(sampleRooms, sampleBookings, sampleUsers);
+    hotel = new Hotel(sampleRooms, sampleUsers, sampleBookings);
   })
   it('should be a function', function() {
     expect(Hotel).to.be.a('function');
@@ -23,6 +23,10 @@ describe('Hotel details', function() {
     expect(hotel.rooms.length).to.equal(25)
     expect(hotel.rooms[0].number).to.equal(1)
     expect(hotel.rooms[5].bedSize).to.equal('queen')
+  })
+  it('should have a list of users', function() {
+    expect(hotel.users.length).to.equal(50)
+    expect(hotel.users[2].name).to.equal('Kelvin Schiller')
   })
   it('should calculate how many rooms are available for a given date', function() {
     const numberOfRooms = hotel.findRoomsAvailable('2020/04/22', sampleBookings)

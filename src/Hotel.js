@@ -1,6 +1,7 @@
 class Hotel {
-  constructor(roomData, bookingData, userData) {
+  constructor(roomData, userData, bookingData) {
     this.rooms = roomData;
+    this.users = userData
   }
 
   getBookingData(date, data) {
