@@ -14,16 +14,16 @@ import Booking from '../src/Booking';
 
 import api from './api.js'
 
-const hotel = new Hotel()
 // repo could live inside Hotel
 //manager vs customer -- access all info vs just themselves
 // Bookings - class
 // separation: hotel doesn't want user to see all data -- therefore don't want repo's as global variables
 // if manager/customer..
 
-let customerRepository = []
-let roomRepository = []
-let bookingRepository = []
+const customerRepository = []
+const roomRepository = []
+const bookingRepository = []
+const hotel = new Hotel(roomRepository, customerRepository, bookingRepository)
 
 // this.username === username.value -- if no user found/error message
 
@@ -45,11 +45,9 @@ function apiData() {
         bookingRepository.push(booking)
       })
     })
-    .then(() => console.log('hi'))
+    .then(() => console.log('hi', hotel.findUserBookings(1)))
 }
   // fake database --> need to store it somewhere (global instances of repo classes for now)
-
-console.log('hay', hotel.findUsersBookings(1, bookingRepository))
 
 // calendar->pick date -> compare rooms in hotel vsbookings for date
 // dynamic web app pattern - page in loading state until api call finished
