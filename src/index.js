@@ -148,19 +148,30 @@ function populateCustomerDashboard() {
     </section>`
 }
 
+function availableRoomsDisplay(roomsOpen) {
+  let availableRooms = '<ul>'
+  roomsOpen.forEach(room => {
+    availableRooms += '<li>' + 'Room Number: ' + room.number + ' Room Type: ' + room.roomType + '</li>'
+    })
+  return availableRooms += '</ul>'
+}
+
 function searchForRooms(event) {
   const dateInput = document.querySelector('#date-input')
   const customerBookingInfo = document.querySelector('.customer-booking-info')
+  const searchResults = document.querySelector('.search-results')
   const date = dateInput.value.replace(/-/g, '/')
 
   if (event.target.id === 'search-date-button') {
     customerBookingInfo.classList.add('hidden')
-    if (date <= getTodaysDate()) {
-      customerDashboardView.innerHTML += `You can only see available rooms for ${getTodaysDate()} and beyond.`
+    if (date < getTodaysDate()) {
+      searchResults.innerHTML += `You can only see available rooms for ${getTodaysDate()} and beyond.`
     } else {
-      customerDashboardView.innerHTML += `
+      console.log(date)
+      let roomsOpen = hotel.getAvailableRooms(date)
+      searchResults.innerHTML = `
         <section class="customer-search-results">
-          hi
+          ${availableRoomsDisplay(roomsOpen)}
         </section>`
     }
   }
@@ -192,7 +203,7 @@ function handleLogOutClick(event) {
 function getTodaysDate() {
   let date = new Date()
   let day = date.getDate()
-  let month = date.getMonth() + 1
+  let month = (date.getMonth() + 1)
   if (day < 10) {
     day = `0${day}`
   }
