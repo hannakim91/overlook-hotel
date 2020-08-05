@@ -67,7 +67,7 @@ class Hotel {
   }
 
   getRoomsByType(roomsAvailable, roomType) {
-    return roomsAvailable.filter(room => room.roomType === roomType)
+    return roomsAvailable.filter(room => room.roomType.includes(roomType))
   }
 
 

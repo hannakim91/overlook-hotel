@@ -196,16 +196,13 @@ function availableRoomsDisplay(roomsOpen) {
 }
 
 function searchForRoomsByType(event) {
-  const suiteButton = document.querySelector('.suite-button')
   if (event.target.classList.contains('room-type-button')) {
     const dateInput = document.querySelector('#date-input')
     const searchResults = document.querySelector('.search-results')
     const selectedDate = dateInput.value.replace(/-/g, '/')
     const roomsOpen = hotel.getAvailableRooms(selectedDate)
     const subsetRoomsOpen = hotel.getRoomsByType(roomsOpen, event.target.id)
-    console.log(subsetRoomsOpen)
-    console.log(availableRoomsDisplay(subsetRoomsOpen))
-    console.log(typeof event.target.id)
+
     searchResults.innerHTML = `${availableRoomsDisplay(subsetRoomsOpen)}`
   }
 }
