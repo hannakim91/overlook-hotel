@@ -10,9 +10,9 @@ class Customer extends User {
     this.bookings = [];
   }
 
-  // getMyBookingData(hotel, id) {
-  //   this.bookings = hotel.findUserBookings(id);
-  // }
+  getMyBookingData(hotel, id) {
+    this.bookings = hotel.findUserBookings(id);
+  }
   // get rid of these methods
   // when instantiate new customer: run hotel.findUserBookings on DOM/elsewhere
   // get booking data using their Id

@@ -14,7 +14,8 @@ import Booking from '../src/Booking';
 
 import api from './api.js'
 
-const hotel = new Hotel()
+const hotel = new Hotel();
+let userToDisplay;
 
 function apiData() {
   api.getApiData()
@@ -76,6 +77,7 @@ function windowOnClick(event) {
   handleLogOutClick(event);
   searchForRooms(event);
   searchForRoomsByType(event);
+  bookRoom(event);
 }
 
 function viewDashboard(event) {
@@ -140,7 +142,7 @@ function createPastBookingsDisplay(bookings) {
 function populateCustomerDashboard() {
   // match localstorage user to customer.username
   const loggedInUser = localStorage.getItem('user')
-  const userToDisplay = hotel.users.find(user => user.username === loggedInUser)
+  userToDisplay = hotel.users.find(user => user.username === loggedInUser)
   console.log(userToDisplay)
   const userBookings = hotel.findUserBookings(userToDisplay.id)
 
@@ -183,6 +185,7 @@ function searchForRooms(event) {
           </section>
           <h1>Rooms available on ${selectedDate}</h1>
           ${availableRoomsDisplay(roomsOpen)}
+          <button class="book-room-button">Book Room</button>
         </section>`
     }
   }
@@ -214,7 +217,16 @@ function searchForRoomsByType(event) {
     <section>
       <h1>Rooms available on ${selectedDate}</h1>
       ${availableRoomsDisplay(subsetRoomsOpen)}
+      <button class="book-room-button">Book Room</button>
     </section>`
+  }
+}
+
+function bookRoom(event) {
+  const bookRoomButton = document.querySelector('.book-room-button')
+  if (event.target === bookRoomButton) {
+    userToDisplay.getMyBookingData(hotel, userToDisplay.id)
+    console.log(userToDisplay.bookings)
   }
 }
 

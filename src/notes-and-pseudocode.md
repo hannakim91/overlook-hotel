@@ -66,3 +66,8 @@ and only display date, room number, roomservice charges (map)
 const roomType = event.target.id
 console.log(roomType)
 console.log(availableRoomsDisplay(suite))
+
+**to book a room**
+need:
+  - book button
+  - hotel should add to user array of bookings -- method
