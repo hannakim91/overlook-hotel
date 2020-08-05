@@ -1,25 +1,29 @@
 class Hotel {
-  constructor() {}
+  constructor(roomData, userData, bookingData) {
+    this.rooms = roomData || [];
+    this.users = userData || [];
+    this.bookings = bookingData || [];
+  }
 
-  getBookingData(date, data) {
-    let bookings = data.filter(booking => booking.date === date)
+  getBookingData(date) {
+    let bookings = this.bookings.filter(booking => booking.date === date)
     return bookings
   }
 
-  findRoomsAvailable(date, data) {
-    let bookingsOnDate = this.getBookingData(date, data)
+  findRoomsAvailable(date) {
+    let bookingsOnDate = this.getBookingData(date)
     return 25 - bookingsOnDate.length
   }
 
-  calculatePercentBooked(date, data) {
-    let bookingsOnDate = this.getBookingData(date, data)
+  calculatePercentBooked(date) {
+    let bookingsOnDate = this.getBookingData(date)
     return (bookingsOnDate.length / 25) * 100
   }
 
-  calculateTodaysRevenue(date, bookingData, roomData) {
-    let bookingsOnDate = this.getBookingData(date, bookingData)
+  calculateTodaysRevenue(date) {
+    let bookingsOnDate = this.getBookingData(date)
     return bookingsOnDate.reduce((dailyRevenue, bookedRoom) => {
-      roomData.forEach(room => {
+      this.rooms.forEach(room => {
         if (room.number === bookedRoom.roomNumber) {
           dailyRevenue += room.costPerNight
         }
@@ -31,15 +35,15 @@ class Hotel {
   // maybe refactor to give revenue for today OR give customer's total for the day -- reusable but would need 4 parameters passed through... -also if naming too generic, will you know what it's doing?
 
 //can separate out pieces of the method instead
-  findUsersBookings(id, bookingData) {
-    let bookings = bookingData.filter(booking => booking.userID === id)
-    return bookings
+  findUserBookings(id) {
+    let userBookings = this.bookings.filter(booking => booking.userID === id)
+    return userBookings
   }
 
-  calculateUserSpending(id, bookingData, roomData) {
-    let userBookings = this.findUsersBookings(id, bookingData)
+  calculateUserSpending(id) {
+    let userBookings = this.findUserBookings(id)
     return userBookings.reduce((totalSpending, booking) => {
-      roomData.forEach(room => {
+      this.rooms.forEach(room => {
         if (room.number === booking.roomNumber) {
           totalSpending += room.costPerNight
         }
@@ -49,9 +53,9 @@ class Hotel {
     }, 0)
   }
 
-  getAvailableRooms(date, bookingData, roomData) {
-    let bookingsOnDate = this.getBookingData(date, bookingData)
-    let rooms = roomData.reduce((roomsBooked, room) => {
+  getAvailableRooms(date) {
+    let bookingsOnDate = this.getBookingData(date, this.bookings)
+    let rooms = this.rooms.reduce((roomsBooked, room) => {
       bookingsOnDate.forEach(booking => {
         if (booking.roomNumber === room.number) {
           roomsBooked.push(room)
@@ -59,14 +63,16 @@ class Hotel {
       })
       return roomsBooked
     }, [])
-    return roomData.filter(room => !rooms.includes(room))
+    return this.rooms.filter(room => !rooms.includes(room))
   }
 
   getRoomsByType(roomsAvailable, roomType) {
-    return roomsAvailable.filter(room => room.roomType === roomType)
+    return roomsAvailable.filter(room => room.roomType.includes(roomType))
   }
 
-
+  bookRoom() {
+    // add booking to user in users array, list of bookings, and within
+  }
 
     // get array of room objects based on roomsBooked -- array of rooms{} --> use that
   //filter over roomData

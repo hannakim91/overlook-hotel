@@ -34,3 +34,43 @@ from each reservation -- map over and add cost per night?
 - first need to connect Hotel/calculation methods to Customer class and call methods from scripts?
 - where should this live?
 - POST request when hit "book" button
+**fetching and using API data**
+// repo could live inside Hotel
+//manager vs customer -- access all info vs just themselves
+// Bookings - class
+// separation: hotel doesn't want user to see all data -- therefore don't want repo's as global variables
+// if manager/customer..
+
+
+// this.username === username.value -- if no user found/error message
+
+// promise lets function get called --- but since async - it says move on/keep loading page so consolelog doesnt show up yet
+//or userRepositorylike old project =-- ** do this with bookings/room repos**
+
+// fake database --> need to store it somewhere (global instances of repo classes for now)
+
+// calendar->pick date -> compare rooms in hotel vsbookings for date
+// dynamic web app pattern - page in loading state until api call finished
+**display customer dashboard**
+populateCustomerDashboard()
+how to get out of objectObject -- can't post arrays -- maybe array -> string and turn it into an unordered list via HTML?
+also want Hotel method to add this data to customer instance and populate HTML from there instead of hotel
+and only display date, room number, roomservice charges (map)
+### still need to match right user logged in to user info displayed!!!!
+
+**get to search results page**
+- also need some buttons to view/hide different rooms by getRoomsByType
+- queryselectorall for this?
+- be able to select a room to book
+
+const roomType = event.target.id
+console.log(roomType)
+console.log(availableRoomsDisplay(suite))
+
+**to book a room**
+need:
+  - ~~book button~~
+  - hotel should update customer's array of bookings both within hotel class and instance of customer -- method
+  - how to identify list item? need a class/id
+  - way for person to select a room on UI --- list has a class, each bullet is a child element
+  - link to API using post
