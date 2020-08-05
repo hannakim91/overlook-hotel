@@ -181,6 +181,7 @@ function searchForRooms(event) {
             <button class="room-type-button" id="suite">Suite</button>
             <button class="room-type-button" id="residential">Residential Suite</button>
           </section>
+          <h1>Rooms available on ${selectedDate}</h1>
           ${availableRoomsDisplay(roomsOpen)}
         </section>`
     }
@@ -210,7 +211,10 @@ function searchForRoomsByType(event) {
       <button class="room-type-button" id="suite">Suite</button>
       <button class="room-type-button" id="residential">Residential Suite</button>
     </section>
-    ${availableRoomsDisplay(subsetRoomsOpen)}`
+    <section>
+      <h1>Rooms available on ${selectedDate}</h1>
+      ${availableRoomsDisplay(subsetRoomsOpen)}
+    </section>`
   }
 }
 
