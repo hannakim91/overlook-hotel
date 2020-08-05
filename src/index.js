@@ -203,7 +203,14 @@ function searchForRoomsByType(event) {
     const roomsOpen = hotel.getAvailableRooms(selectedDate)
     const subsetRoomsOpen = hotel.getRoomsByType(roomsOpen, event.target.id)
 
-    searchResults.innerHTML = `${availableRoomsDisplay(subsetRoomsOpen)}`
+    searchResults.innerHTML = `
+    <section>
+      <button class="room-type-button" id="single">Single Room</button>
+      <button class="room-type-button" id="junior">Junior Suite</button>
+      <button class="room-type-button" id="suite">Suite</button>
+      <button class="room-type-button" id="residential">Residential Suite</button>
+    </section>
+    ${availableRoomsDisplay(subsetRoomsOpen)}`
   }
 }
 
