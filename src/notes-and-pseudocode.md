@@ -60,4 +60,9 @@ and only display date, room number, roomservice charges (map)
 
 **get to search results page**
 - also need some buttons to view/hide different rooms by getRoomsByType
+- queryselectorall for this?
 - be able to select a room to book
+
+const roomType = event.target.id
+console.log(roomType)
+console.log(availableRoomsDisplay(suite))

@@ -75,6 +75,7 @@ function windowOnClick(event) {
   }
   handleLogOutClick(event);
   searchForRooms(event);
+  searchForRoomsByType(event);
 }
 
 function viewDashboard(event) {
@@ -109,8 +110,6 @@ function storeCustomerData(username) {
   localStorage.setItem('loggedIn', true)
   localStorage.setItem('user', username)
 }
-
-
 // make this a toggle
 function showCustomerDashboard() {
   customerDashboardView.classList.remove('hidden')
@@ -160,6 +159,34 @@ function populateCustomerDashboard() {
     </section>`
 }
 
+function searchForRooms(event) {
+  const dateInput = document.querySelector('#date-input')
+  const customerBookingInfo = document.querySelector('.customer-booking-info')
+  const searchResults = document.querySelector('.search-results')
+  const selectedDate = dateInput.value.replace(/-/g, '/')
+  const roomsOpen = hotel.getAvailableRooms(selectedDate)
+
+  if (event.target.id === 'search-date-button') {
+    customerBookingInfo.classList.add('hidden')
+    if (selectedDate < getTodaysDate()) {
+      searchResults.innerHTML += `You can only see available rooms for ${getTodaysDate()} and beyond.`
+    } else if (roomsOpen.length === 0) {
+      searchResults.innerHTML = `So very extremely and relentlessly sorry to bring to your awareness that there are no rooms available for ${date}. We humbly suggest considering a different date at your leisure if there is an inkling of a possibility of any flexibility in your schedule. Sorry!!!!`
+    } else {
+      searchResults.innerHTML = `
+        <section class="customer-search-results">
+          <section>
+            <button class="room-type-button" id="single">Single Room</button>
+            <button class="room-type-button" id="junior">Junior Suite</button>
+            <button class="room-type-button" id="suite">Suite</button>
+            <button class="room-type-button" id="residential">Residential Suite</button>
+          </section>
+          ${availableRoomsDisplay(roomsOpen)}
+        </section>`
+    }
+  }
+}
+
 function availableRoomsDisplay(roomsOpen) {
   let availableRooms = '<ul>'
   roomsOpen.forEach(room => {
@@ -168,25 +195,18 @@ function availableRoomsDisplay(roomsOpen) {
   return availableRooms += '</ul>'
 }
 
-function searchForRooms(event) {
-  const dateInput = document.querySelector('#date-input')
-  const customerBookingInfo = document.querySelector('.customer-booking-info')
-  const searchResults = document.querySelector('.search-results')
-  const date = dateInput.value.replace(/-/g, '/')
-  const roomsOpen = hotel.getAvailableRooms(date)
-
-  if (event.target.id === 'search-date-button') {
-    customerBookingInfo.classList.add('hidden')
-    if (date < getTodaysDate()) {
-      searchResults.innerHTML += `You can only see available rooms for ${getTodaysDate()} and beyond.`
-    } else if (roomsOpen.length === 0) {
-      searchResults.innerHTML = `So very extremely and relentlessly sorry to bring to your awareness that there are no rooms available for ${date}. We humbly suggest considering a different date at your leisure if there is an inkling of a possibility of any flexibility in your schedule. Sorry!!!!`
-    } else {
-      searchResults.innerHTML = `
-        <section class="customer-search-results">
-          ${availableRoomsDisplay(roomsOpen)}
-        </section>`
-    }
+function searchForRoomsByType(event) {
+  const suiteButton = document.querySelector('.suite-button')
+  if (event.target.classList.contains('room-type-button')) {
+    const dateInput = document.querySelector('#date-input')
+    const searchResults = document.querySelector('.search-results')
+    const selectedDate = dateInput.value.replace(/-/g, '/')
+    const roomsOpen = hotel.getAvailableRooms(selectedDate)
+    const subsetRoomsOpen = hotel.getRoomsByType(roomsOpen, event.target.id)
+    console.log(subsetRoomsOpen)
+    console.log(availableRoomsDisplay(subsetRoomsOpen))
+    console.log(typeof event.target.id)
+    searchResults.innerHTML = `${availableRoomsDisplay(subsetRoomsOpen)}`
   }
 }
 
