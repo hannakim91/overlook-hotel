@@ -71,7 +71,6 @@ class Hotel {
   }
 
 
-
     // get array of room objects based on roomsBooked -- array of rooms{} --> use that
   //filter over roomData
   //if !bookedRooms.includes(room)
