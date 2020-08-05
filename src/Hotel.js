@@ -70,6 +70,9 @@ class Hotel {
     return roomsAvailable.filter(room => room.roomType.includes(roomType))
   }
 
+  bookRoom() {
+    // add booking to user in users array, list of bookings, and within
+  }
 
     // get array of room objects based on roomsBooked -- array of rooms{} --> use that
   //filter over roomData

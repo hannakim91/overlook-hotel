@@ -227,6 +227,7 @@ function bookRoom(event) {
   if (event.target === bookRoomButton) {
     userToDisplay.getMyBookingData(hotel, userToDisplay.id)
     console.log(userToDisplay.bookings)
+    hotel.bookRoom()
   }
 }
 

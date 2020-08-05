@@ -16,6 +16,9 @@ class Customer extends User {
   // get rid of these methods
   // when instantiate new customer: run hotel.findUserBookings on DOM/elsewhere
   // get booking data using their Id
+  bookRoom() {
+    
+  }
 
 
   seeAvailableRooms(hotel, date, bookingData, roomData) {

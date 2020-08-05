@@ -69,5 +69,8 @@ console.log(availableRoomsDisplay(suite))
 
 **to book a room**
 need:
-  - book button
-  - hotel should add to user array of bookings -- method
+  - ~~book button~~
+  - hotel should update customer's array of bookings both within hotel class and instance of customer -- method
+  - how to identify list item? need a class/id
+  - way for person to select a room on UI --- list has a class, each bullet is a child element
+  - link to API using post
