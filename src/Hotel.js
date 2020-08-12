@@ -71,7 +71,7 @@ class Hotel {
   }
 
   bookRoom() {
-    // add booking to user in users array, list of bookings, and within
+    // add booking to user in users array, list of bookings, and within user class
   }
 
     // get array of room objects based on roomsBooked -- array of rooms{} --> use that

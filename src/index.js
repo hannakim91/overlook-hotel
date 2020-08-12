@@ -94,21 +94,16 @@ function checkLogInDetails() {
 // should check with input values be properties of User?
   if (username.value === 'manager' && password.value === 'overlook2020') {
     showManagerDashboard() // not yet a method
-    storeManagerData()
+    storeData('manager')
   } else if (username.value.includes('customer') && password.value === 'overlook2020') {
-    storeCustomerData(username.value)
+    storeData(username.value)
     showCustomerDashboard()
   } else {
     logInForm.innerHTML += 'Please refresh and enter a valid username and password'
   }
 }
 
-function storeManagerData() {
-  localStorage.setItem('loggedIn', true)
-  localStorage.setItem('user', 'manager')
-}
-
-function storeCustomerData(username) {
+function storeData(username) {
   localStorage.setItem('loggedIn', true)
   localStorage.setItem('user', username)
 }
