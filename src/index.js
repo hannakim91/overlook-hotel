@@ -34,7 +34,21 @@ function getCustomerApi() {
     .then(() => populateCustomerDashboard())
 }
 
-
+function getManagerApi() {
+  api.getApiData()
+    .then(data => {
+      data.userData.forEach(user => {
+        hotel.users.push(new Customer(user))
+      })
+      data.roomData.forEach(room => {
+        hotel.rooms.push(room)
+      })
+      data.bookingData.forEach(booking => {
+        hotel.bookings.push(booking)
+      })
+    })
+    .then(() => populateManagerDashboard())
+}
 
 // document = everything on page therefore can't select something that isn't already on the doc -- need to use a diff way to target at another time
 const mloginPopup = document.querySelector('.mlogin-popup');
@@ -108,6 +122,25 @@ function storeData(username) {
 function showManagerDashboard() {
   managerDashboardView.classList.remove('hidden')
   mainView.classList.add('hidden')
+  getManagerApi()
+}
+
+function populateManagerDashboard() {
+  console.log(hotel)
+
+  managerDashboardView.innerHTML += `
+    <section class="customer-booking-info">
+      <h1 class="customer-header">Hello Mr. Manager!</h1>
+      <section>
+        <h2>Hotel Stats for ${getTodaysDate()}</h2>
+          <h3>Rooms Available: </h3>
+            <p>${hotel.findRoomsAvailable(getTodaysDate())}</p>
+          <h3>Revenue:</h3>
+            <p>${hotel.calculateTodaysRevenue(getTodaysDate())}</p>
+          <h3>Percent of Rooms Occupied:</h3>
+            <p>${hotel.calculatePercentBooked(getTodaysDate())}</p>
+      </section>
+    </section>`
 }
 
 // make this a toggle
