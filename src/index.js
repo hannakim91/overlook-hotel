@@ -17,7 +17,7 @@ import api from './api.js'
 const hotel = new Hotel();
 let userToDisplay;
 
-function apiData() {
+function getCustomerApi() {
   api.getApiData()
     .then(data => {
       data.userData.forEach(user => {
@@ -34,6 +34,8 @@ function apiData() {
     .then(() => populateCustomerDashboard())
 }
 
+
+
 // document = everything on page therefore can't select something that isn't already on the doc -- need to use a diff way to target at another time
 const mloginPopup = document.querySelector('.mlogin-popup');
 const mloginTrigger = document.querySelector('.mlogin-trigger');
@@ -48,10 +50,6 @@ window.addEventListener('click', windowOnClick);
 mloginTrigger.addEventListener('click', toggleModal);
 modalCloseButton.addEventListener('click', toggleModal);
 changeViewButton.addEventListener('click', viewDashboard);
-
-// function parseLocalStorage() {
-//
-// }
 
 function onWindowLoad() {
   const user = localStorage.getItem('user')
@@ -84,7 +82,6 @@ function viewDashboard(event) {
   event.preventDefault();
   toggleModal()
   checkLogInDetails()
-  // showDashboard()
 }
 
 function checkLogInDetails() {
@@ -107,11 +104,17 @@ function storeData(username) {
   localStorage.setItem('loggedIn', true)
   localStorage.setItem('user', username)
 }
+
+function showManagerDashboard() {
+  managerDashboardView.classList.remove('hidden')
+  mainView.classList.add('hidden')
+}
+
 // make this a toggle
 function showCustomerDashboard() {
   customerDashboardView.classList.remove('hidden')
   mainView.classList.add('hidden')
-  apiData()
+  getCustomerApi()
 }
 
 function createUpcomingBookingsDisplay(bookings) {
@@ -226,11 +229,6 @@ function bookRoom(event) {
   }
 }
 
-function showManagerDashboard() {
-  managerDashboardView.classList.remove('hidden')
-  mainView.classList.add('hidden')
-}
-
 //event bubbling
 // click handler function - if event.target === logOutButton
  // calls display functions
@@ -246,7 +244,6 @@ function handleLogOutClick(event) {
     customerDashboardView.classList.add('hidden')
     mainView.classList.remove('hidden')
   }
-  //not working for manager ATM -- event.target.classlist.contains -- make it class instead
 }
 
 function getTodaysDate() {
@@ -265,3 +262,4 @@ function getTodaysDate() {
 }
 
 getTodaysDate()
+// probably should move this to inside an event handler at some point
