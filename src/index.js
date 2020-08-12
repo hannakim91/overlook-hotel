@@ -126,8 +126,6 @@ function showManagerDashboard() {
 }
 
 function populateManagerDashboard() {
-  console.log(hotel)
-
   managerDashboardView.innerHTML += `
     <section class="customer-booking-info">
       <h1 class="customer-header">Hello Mr. Manager!</h1>
