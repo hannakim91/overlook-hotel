@@ -74,3 +74,10 @@ need:
   - how to identify list item? need a class/id
   - way for person to select a room on UI --- list has a class, each bullet is a child element
   - link to API using post
+
+  sad path test -- e.g. if you pass in undefined/null
+  hotel.calculatePercentBooked(undefined)
+  // extension if i take it:
+  * iteration 2: completely finish (manager basic)
+  * iteration 3: book button for customer - book a specific room
+  * list of bullet point --> into cards SASS/CSS
